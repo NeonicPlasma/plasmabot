@@ -57,7 +57,21 @@ async def neonicwhy(ctx):
     responseChosen = possibleresponses[number]
     await ctx.send('neonic why ' + responseChosen)
     
-    
+@bot.command()
+async def toggleminigames(ctx):
+    role = discord.utils.get(ctx.guild.roles, name="Interested In Minigames!")
+    minigameRole = false
+    for r in ctx.author.roles:
+        if r = role:
+            minigameRole = True
+    if minigameRole = True:
+        user = ctx.message.author
+        await user.remove_roles(role)
+        await ctx.send('**You no longer have the Minigame role!** If you want to get it again, use p!toggleminigames.**')
+    else:
+        user = ctx.message.author
+        await user.remove_roles(role)
+        await ctx.send('**You now have the Minigame role!** If you want to remove it, use p!toggleminigames.**')
 
 
 bot.run(os.getenv('TOKEN'))
