@@ -13,6 +13,8 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+    game = discord.Game("killing Neonic")
+    await bot.change_presence(status=discord.Status.online, activity=game)
 
 bot.remove_command('help')
 
@@ -34,8 +36,6 @@ async def ask(ctx):
 
 @bot.command()
 async def serverlinks(ctx):
-    game = discord.Game("killing Neonic")
-    await bot.change_presence(status=discord.Status.online, activity=game)
     link1 = 'https://discord.gg/WW9Mzce'
     link2 = 'https://discord.gg/JdFBfUS'
     link3 = 'https://discord.gg/DDxdSwa'
