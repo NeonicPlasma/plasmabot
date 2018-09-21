@@ -62,9 +62,9 @@ async def toggleminigames(ctx):
     role = discord.utils.get(ctx.guild.roles, name="Interested In Minigames!")
     minigameRole = false
     for r in ctx.author.roles:
-        if r = role:
+        if r == role:
             minigameRole = True
-    if minigameRole = True:
+    if minigameRole == True:
         user = ctx.message.author
         await user.remove_roles(role)
         await ctx.send('**You no longer have the Minigame role!** If you want to get it again, use p!toggleminigames.**')
