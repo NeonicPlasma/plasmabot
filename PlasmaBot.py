@@ -3,6 +3,7 @@ from discord.ext import commands
 
 import random
 import asyncio
+import os
 
 command_prefix='p!'
 bot = commands.Bot(command_prefix)
@@ -59,4 +60,4 @@ async def neonicwhy(ctx):
     
 
 
-bot.run("NDkyNTgyMTU4MTA0NTI2ODYx.DoYi9w.Y40pxoGfZnrJtdsfT9sCBwts0Wo")
+bot.run(os.getenv('TOKEN'))
