@@ -72,8 +72,7 @@ async def neonicwhy(ctx):
     
 @bot.command()
 async def toggleminigames(ctx):
-    await ctx.send('lmao')
-    role = discord.utils.get(ctx.guild.roles, id=492794335042207765)
+    role = discord.utils.get(ctx.guild.roles, id='492794335042207765')
     user = ctx.message.author
     roles = user.roles
     if role in roles:
