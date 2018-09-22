@@ -110,5 +110,7 @@ async def bombminigame(ctx, mode):
         else:
             queue.append(userid)
             ctx.send(user.mention + ' has been added to the queue!')
+    else:
+        ctx.send('Invalid mode!')
         
 bot.run(os.getenv('TOKEN'))
