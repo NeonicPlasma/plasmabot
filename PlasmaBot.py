@@ -113,4 +113,8 @@ async def bombminigame(ctx, mode):
     else:
         ctx.send('Invalid mode!')
         
+@bot.command()
+async def test(ctx, test):
+    ctx.send(test)
+        
 bot.run(os.getenv('TOKEN'))
