@@ -60,7 +60,7 @@ async def neonicwhy(ctx):
 @bot.command()
 async def toggleminigames(ctx):
     role = discord.utils.get(ctx.guild.roles, name="Interested In Minigames!")
-    minigameRole = false
+    minigameRole = False
     for r in ctx.author.roles:
         if r == role:
             minigameRole = True
