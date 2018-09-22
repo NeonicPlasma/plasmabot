@@ -16,6 +16,11 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
+@bot.event
+async def on_member_join(member):
+    channel = bot.get_channel(492577748003586048)
+    channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good time here, and make sure to read #welcome and #guidelines!"
+    
 bot.remove_command('help')
 
 @bot.command()
