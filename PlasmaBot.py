@@ -9,12 +9,12 @@ command_prefix='p!'
 bot = commands.Bot(command_prefix)
 
 async def on_ready():
+    game = discord.Game("killing Neonic")
+    await bot.change_presence(status=discord.Status.online, activity=game)
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    game = discord.Game("killing Neonic")
-    await bot.change_presence(status=discord.Status.online, activity=game)
 
 bot.remove_command('help')
 
@@ -45,15 +45,17 @@ async def serverlinks(ctx):
     linkEmbed.add_field(name = "The Trials (neonic's camp)", value = link3)
     await ctx.send(embed=embed)
 
-    @bot.command()
-async def serverlinks(ctx):
-    neonicwhy = 'Use this command to ask Neonic, why?'
+@bot.command()
+async def help(ctx):
+    neonicwhy = 'Use this command to see some stupid stuff Neonic has done!'
     serverlinks = "Use this command to see Neonic's important servers!"
-    link3 = 'https://discord.gg/DDxdSwa'
-    linkEmbed = embed = discord.Embed(title = "Plasma's Server Links", description = "Here are all of NeonicPlasma's important server links!", color=0x00ff00)
-    linkEmbed.add_field(name = "Plasma's Realm (the main hub for the bot!)", value = link1)
-    linkEmbed.add_field(name = "TWOW: Plasma's Race (neonic's twow)", value = link2)
-    linkEmbed.add_field(name = "The Trials (neonic's camp)", value = link3)
+    toggleminigames = 'Use this command to toggle your minigame status!'
+    ask = "Use this command to ask me a question! Although, you might not like the answer."
+    linkEmbed = embed = discord.Embed(title = "PlasmaBot Commands", description = "Need help? Here are some commands!", color=0x00ff00)
+    linkEmbed.add_field(name = "p!neonicwhy", value = neonicwhy)
+    linkEmbed.add_field(name = "p!serverlinks", value = serverlinks)
+    linkEmbed.add_field(name = "p!toggleminigames", value = toggleminigames)
+    linkEmbed.add_field(name = "p!ask", value = ask)
     await ctx.send(embed=embed)
 
 @bot.command()
