@@ -97,8 +97,4 @@ async def toggleminigames(ctx):
         await ctx.send('**You now have the Minigame role!** If you want to remove it, use p!toggleminigames.')
         await user.add_roles(role)
 
-@bot.command()
-async def bombminigame(ctx, mode):
-    if mode == 'queue':
-
 bot.run(os.getenv('TOKEN'))
