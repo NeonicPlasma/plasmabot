@@ -45,6 +45,17 @@ async def serverlinks(ctx):
     linkEmbed.add_field(name = "The Trials (neonic's camp)", value = link3)
     await ctx.send(embed=embed)
 
+    @bot.command()
+async def serverlinks(ctx):
+    neonicwhy = 'Use this command to ask Neonic, why?'
+    serverlinks = "Use this command to see Neonic's important servers!"
+    link3 = 'https://discord.gg/DDxdSwa'
+    linkEmbed = embed = discord.Embed(title = "Plasma's Server Links", description = "Here are all of NeonicPlasma's important server links!", color=0x00ff00)
+    linkEmbed.add_field(name = "Plasma's Realm (the main hub for the bot!)", value = link1)
+    linkEmbed.add_field(name = "TWOW: Plasma's Race (neonic's twow)", value = link2)
+    linkEmbed.add_field(name = "The Trials (neonic's camp)", value = link3)
+    await ctx.send(embed=embed)
+
 @bot.command()
 async def neonicwhy(ctx):
     possibleresponses = [
@@ -61,7 +72,7 @@ async def neonicwhy(ctx):
 async def toggleminigames(ctx):
     role = discord.utils.get(ctx.guild.roles, name="Interested In Minigames!")
     minigameRole = False
-    for r in ctx.author.roles:
+    for r in ctx.message.author.roles:
         if r == role:
             minigameRole = True
     if minigameRole == True:
