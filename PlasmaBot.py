@@ -32,6 +32,7 @@ eliminationOrder = []
 
 # Hosting Related Variables:
 queue = []
+currentHost = []
 
 @bot.command()
 async def ask(ctx):
@@ -96,5 +97,17 @@ async def toggleminigames(ctx):
     else:
         await ctx.send('**You now have the Minigame role!** If you want to remove it, use p!toggleminigames.')
         await user.add_roles(role)
-
+        
+@bot.command()
+async def bombminigame(ctx, mode):
+    user = ctx.message.author
+    userid = user.id
+    channel = ctx.message.channel
+    if mode == 'queue':
+        if userid in queue:
+            # Nothing Happens
+        else:
+            queue.append(userid)
+            ctx.send(user.mention + ' has been added to the queue!'
+        
 bot.run(os.getenv('TOKEN'))
