@@ -80,7 +80,7 @@ async def toggleminigames(ctx):
         await user.remove_roles(role)
     else:
         await ctx.send('**You now have the Minigame role!** If you want to remove it, use p!toggleminigames.')
-        await user.add_roles(role)
+        await user.give_roles(role)
 
 
 bot.run(os.getenv('TOKEN'))
