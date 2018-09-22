@@ -105,7 +105,8 @@ async def bombminigame(ctx, mode):
     channel = ctx.message.channel
     if mode == 'queue':
         if userid in queue:
-            # Nothing Happens
+            queue.remove(userid)
+            ctx.send(user.mention + ' has left the queue!')
         else:
             queue.append(userid)
             ctx.send(user.mention + ' has been added to the queue!'
