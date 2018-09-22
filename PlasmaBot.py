@@ -76,10 +76,10 @@ async def toggleminigames(ctx):
     user = ctx.message.author
     roles = user.roles
     if role in roles:
-        await user.remove_roles(user, role)
+        await user.remove_roles(role)
         await ctx.send('**You no longer have the Minigame role!** If you want to get it again, use p!toggleminigames.')
     else:
-        await user.give_roles(user, role)
+        await user.give_roles(role)
         await ctx.send('**You now have the Minigame role!** If you want to remove it, use p!toggleminigames.')
 
 
