@@ -109,6 +109,6 @@ async def bombminigame(ctx, mode):
             ctx.send(user.mention + ' has left the queue!')
         else:
             queue.append(userid)
-            ctx.send(user.mention + ' has been added to the queue!'
+            ctx.send(user.mention + ' has been added to the queue!')
         
 bot.run(os.getenv('TOKEN'))
