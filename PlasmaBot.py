@@ -105,16 +105,16 @@ async def bombminigame(ctx, mode):
     channel = ctx.message.channel
     if mode == 'queue':
         if userid in queue:
-            ctx.send(user.mention + ' has left the queue!')
+            await ctx.send(user.mention + ' has left the queue!')
             queue.remove(userid)
         else:
-            ctx.send(user.mention + ' has been added to the queue!')
+            await ctx.send(user.mention + ' has been added to the queue!')
             queue.append(userid)
     else:
-        ctx.send('Invalid mode!')
+        await ctx.send('Invalid mode!')
         
 @bot.command()
 async def test(ctx, test):
-    ctx.send(test)
+    await ctx.send(test)
         
 bot.run(os.getenv('TOKEN'))
