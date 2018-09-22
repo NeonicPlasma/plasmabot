@@ -8,6 +8,7 @@ import os
 command_prefix='p!'
 bot = commands.Bot(command_prefix)
 
+@bot.event
 async def on_ready():
     game = discord.Game("killing Neonic")
     await bot.change_presence(status=discord.Status.online, activity=game)
@@ -22,6 +23,15 @@ async def on_member_join(member):
     channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good time here, and make sure to read #welcome and #guidelines!")
 
 bot.remove_command('help')
+
+# Minigame Related Variables:
+
+minigameHappening = False
+minigameParticipants = []
+eliminationOrder = []
+
+# Hosting Related Variables:
+queue = []
 
 @bot.command()
 async def ask(ctx):
@@ -87,5 +97,8 @@ async def toggleminigames(ctx):
         await ctx.send('**You now have the Minigame role!** If you want to remove it, use p!toggleminigames.')
         await user.add_roles(role)
 
+@bot.command()
+async def bombminigame(ctx, mode):
+    if mode == 'queue':
 
 bot.run(os.getenv('TOKEN'))
