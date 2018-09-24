@@ -19,9 +19,17 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
+    welcome = bot.get_channel(492571950422556672)
+    guidelines = bot.get_channel(492571898010664970)
     channel = bot.get_channel(492577748003586048)
-    await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good time here, and make sure to read #welcome and #guidelines!")
+    await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good experience here, and make sure to read " + welcome.mention + " and " + guidelines.mention + "!")
 
+@bot.event
+async def on_member_remove(member):
+    channel = bot.get_channel(492577748003586048)
+    await channel.send("Aww, **" + member.name + member.discriminator + "!** I hope you come back soon!")
+   
+    
 bot.remove_command('help')
 
 # Minigame Related Variables:
