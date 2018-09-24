@@ -139,13 +139,48 @@ async def plasmafight(ctx):
     timeWait = 2
     player1hp = 150
     player2hp = 150
-    embed = discord.Embed(title = '', description = '**Plasma Fight: Player1 vs Player 2!**', color = 0x00ff00)
+    embed = discord.Embed(title = '**Plasma Fight: Player1 vs Player 2!**', description = '', color = 0x00ff00)
     embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
     embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
     msg = await ctx.send(embed = embed)
+    line1 = ''
+    line2 = ''
+    line3 = ''
+    turn = 1
+    shotAt = 2
     while player1hp != 0 and player2hp != 0:
         await asyncio.sleep(timeWait)
-        player1hp = player1hp - 15
-        await ctx.send('Player 1 has ' + str(player1hp))
+        damageDealt = random.randint(1, 30)
+        weaponUsed = ''
+        action = ''
+        if damageDealt >= 1 and damageDealt <= 5:
+            weaponUsed = 'plasma spear'
+            action = ' stabs'
+        elif damageDealt >= 6 and damageDealt <= 10:
+            weaponUsed = 'plasma sword'
+            action = ' stabs'
+        elif damageDealt >= 11 and damageDealt <= 15:
+            weaponUsed = 'plasma pistol'
+            action = ' shoots'
+        elif damageDealt >= 16 and damageDealt <= 20:
+            weaponUsed = 'plasma turret'
+            action = ' shoots'
+        elif damageDealt >= 21 and damageDealt <= 25:
+            weaponUsed = 'plasma grenade'
+            action = ' blows up'
+        elif damageDealt >= 26 and damageDealt <= 30:
+            weaponUsed = 'plasma reactor'
+            action = ' poisons'
+        line = "Player" + str(turn) + action + " Player" + str(shotAt) + " and deals " + str(damageDealt) + "damage!"
+        await ctx.send(line + "\v" + "hello")
+        # line3 = line2
+        #line2 = line1
+        #line1 = line
+        #desc = ''
+       # if line3 == '':
+         #   if line2 == '':
+          #      desc = line1
+           # else:
+            #    desc = line1 + ''
         
 bot.run(os.getenv('TOKEN'))
