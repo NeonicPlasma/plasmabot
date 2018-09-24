@@ -146,9 +146,5 @@ async def plasmafight(ctx):
     await asyncio.wait(timeWait)
     player1hp = 140
     await ctx.send('Nice!')
-    while player1hp != 0 and player2hp != 0:
-        await asyncio.wait(timeWait)
-        await ctx.send('Nice!')
-    await ctx.send("ran already.")
         
 bot.run(os.getenv('TOKEN'))
