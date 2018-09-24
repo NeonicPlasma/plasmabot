@@ -139,6 +139,6 @@ async def plasmafight(ctx):
     player2hp = 150
     embed = discord.Embed(title = '', description = 'hi hi hi hi hi')
     await ctx.send(embed = embed)
-    await ctx.send(date.fromtimestamp)
+    await ctx.send(date.fromtimestamp())
         
 bot.run(os.getenv('TOKEN'))
