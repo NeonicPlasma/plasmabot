@@ -9,9 +9,10 @@ import time
 command_prefix='p!'
 bot = commands.Bot(command_prefix)
 
+game = discord.Game("killing Neonic")
+
 @bot.event
 async def on_ready():
-    game = discord.Game("killing Neonic")
     await bot.change_presence(status=discord.Status.online, activity=game)
     print('Logged in as')
     print(bot.user.name)
@@ -135,17 +136,18 @@ async def botsend(ctx, message):
         
 @bot.command()
 async def plasmafight(ctx):
-    timeWait = 5
+    timeWait = 2
     player1hp = 150
     player2hp = 150
-    value = False
     embed = discord.Embed(title = '', description = '**Plasma Fight: Player1 vs Player 2!**', color = 0x00ff00)
-    await ctx.send(embed = embed)
-    logTime = time.time()
-    while ((time.time() - logTime) < timeWait):
-        value = True
-        await ctx.send('wanna fokin go')
-    await ctx.send('5 seconds have passed!')
-    
+    embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
+    embed.add_field(name = 'Player1', value = str(player2hp) + '/150')
+    msg = await ctx.send(embed = embed)
+    while player1hp != 0 and player2hp != 0:
+        logTime = time.time()
+        while ((time.time() - logTime) < timeWait):
+            await bot.change_presence(status=discord.Status.online, activity=game)
+        await ctx.send("woo hoo.")
+        
         
 bot.run(os.getenv('TOKEN'))
