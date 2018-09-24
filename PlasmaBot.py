@@ -171,8 +171,9 @@ async def plasmafight(ctx):
         elif damageDealt >= 26 and damageDealt <= 30:
             weaponUsed = 'plasma reactor'
             action = ' poisons'
-        line = "Player" + str(turn) + action + " Player" + str(shotAt) + " and deals " + str(damageDealt) + "damage!"
-        await ctx.send(line + "\v" + "hello")
+        line = "Player" + str(turn) + action + " Player" + str(shotAt) + "with a " + weaponUsed + " and deals " + str(damageDealt) + " damage!"
+        player1hp = player1hp - 10
+        await ctx.send(line + "\n" + "hello")
         # line3 = line2
         #line2 = line1
         #line1 = line
