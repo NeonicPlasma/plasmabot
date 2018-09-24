@@ -174,14 +174,25 @@ async def plasmafight(ctx):
         line = "Player" + str(turn) + action + " Player" + str(shotAt) + "with a " + weaponUsed + " and deals " + str(damageDealt) + " damage!"
         player1hp = player1hp - 10
         await ctx.send(line + "\n" + "hello")
-        # line3 = line2
-        #line2 = line1
-        #line1 = line
-        #desc = ''
-       # if line3 == '':
-         #   if line2 == '':
-          #      desc = line1
-           # else:
-            #    desc = line1 + ''
+        line3 = line2
+        line2 = line1
+        line1 = line
+        newembed = discord.Embed(title = '**Plasma Fight: Player1 vs Player 2!**', description = '', color = 0x00ff00
+        if line3 == '':
+            if line2 == '':
+                newembed.add_field(name = '', value = line1)
+                embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
+                embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
+            else:
+                newembed.add_field(name = '', value = line2)
+                newembed.add_field(name = '', value = line1)
+                embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
+                embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
+        else:
+            newembed.add_field(name = '', value = line3)
+            newembed.add_field(name = '', value = line2)
+            newembed.add_field(name = '', value = line1)
+            embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
+            embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
         
 bot.run(os.getenv('TOKEN'))
