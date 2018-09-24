@@ -136,7 +136,7 @@ async def botsend(ctx, message):
         
 @bot.command()
 async def plasmafight(ctx):
-    timeWait = 2
+    timeWait = 4
     player1hp = 150
     player2hp = 150
     embed = discord.Embed(title = '', description = '**Plasma Fight: Player1 vs Player 2!**', color = 0x00ff00)
