@@ -4,7 +4,7 @@ from discord.ext import commands
 import random
 import asyncio
 import os
-import time
+from datetime import date
 
 command_prefix='p!'
 bot = commands.Bot(command_prefix)
@@ -139,6 +139,6 @@ async def plasmafight(ctx):
     player2hp = 150
     embed = discord.Embed(title = '', description = 'hi hi hi hi hi')
     await ctx.send(embed = embed)
-    await ctx.send(time.time)
+    await ctx.send(date.fromtimestamp)
         
 bot.run(os.getenv('TOKEN'))
