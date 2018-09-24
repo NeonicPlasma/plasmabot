@@ -153,6 +153,6 @@ async def plasmafight(ctx):
             gameNotFinished = False
         elif player2hp == 0:
             gameNotFinished = False
-        
+    await ctx.send("ran already.")
         
 bot.run(os.getenv('TOKEN'))
