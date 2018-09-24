@@ -141,10 +141,11 @@ async def plasmafight(ctx):
     player2hp = 150
     embed = discord.Embed(title = '', description = '**Plasma Fight: Player1 vs Player 2!**', color = 0x00ff00)
     embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
-    embed.add_field(name = 'Player1', value = str(player2hp) + '/150')
+    embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
     msg = await ctx.send(embed = embed)
-    for x in range(10):
+    while player1hp != 0 and player2hp != 0:
         await asyncio.sleep(timeWait)
-        await ctx.send('Nice!')
+        player1hp = player1hp - 15
+        await ctx.send('Player 1 has ' + str(player1hp))
         
 bot.run(os.getenv('TOKEN'))
