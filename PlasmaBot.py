@@ -144,6 +144,7 @@ async def plasmafight(ctx):
     embed.add_field(name = 'Player1', value = str(player2hp) + '/150')
     msg = await ctx.send(embed = embed)
     await asyncio.wait(timeWait)
+    player1hp = 140
     await ctx.send('Nice!')
     while player1hp != 0 and player2hp != 0:
         await asyncio.wait(timeWait)
