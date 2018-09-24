@@ -142,9 +142,8 @@ async def plasmafight(ctx):
     embed = discord.Embed(title = '', description = '**Plasma Fight: Player1 vs Player 2!**', color = 0x00ff00)
     await ctx.send(embed = embed)
     logTime = time.time()
-    while ((time.time() - currentTime) < timeWait):
+    while ((time.time() - logTime) < timeWait):
         value = True
-        await ctx.send('ok spam')
     await ctx.send('5 seconds have passed!')
     
         
