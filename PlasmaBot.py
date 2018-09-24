@@ -136,15 +136,16 @@ async def botsend(ctx, message):
         
 @bot.command()
 async def plasmafight(ctx):
-    timeWait = 4
+    timeWait = 2
     player1hp = 150
     player2hp = 150
     embed = discord.Embed(title = '', description = '**Plasma Fight: Player1 vs Player 2!**', color = 0x00ff00)
     embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
     embed.add_field(name = 'Player1', value = str(player2hp) + '/150')
     msg = await ctx.send(embed = embed)
-    gameNotFinished = True
-    await asyncio.sleep(timeWait)
+    while player1hp != 0 and player2hp != 0:
+        await asyncio.wait(timeWait)
+        await ctx.send('Nice!')
     await ctx.send("ran already.")
         
 bot.run(os.getenv('TOKEN'))
