@@ -142,7 +142,7 @@ async def plasmafight(ctx):
     embed = discord.Embed(title = '**Plasma Fight: Player1 vs Player 2!**', description = '', color = 0x00ff00)
     embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
     embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
-    msg = await ctx.send(embed = embed)
+    msg = await ctx.send(embed = embed) return
     line1 = ''
     line2 = ''
     line3 = ''
