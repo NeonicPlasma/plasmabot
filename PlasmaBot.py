@@ -177,7 +177,7 @@ async def plasmafight(ctx):
         line3 = line2
         line2 = line1
         line1 = line
-        newembed = discord.Embed(title = '**Plasma Fight: Player1 vs Player 2!**', description = '', color = 0x00ff00
+        newembed = discord.Embed(title = '**Plasma Fight: Player1 vs Player 2!**', description = '', color = 0x00ff00)
         if line3 == '':
             if line2 == '':
                 newembed.add_field(name = '', value = line1)
