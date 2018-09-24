@@ -4,6 +4,7 @@ from discord.ext import commands
 import random
 import asyncio
 import os
+import time
 
 command_prefix='p!'
 bot = commands.Bot(command_prefix)
@@ -131,5 +132,16 @@ async def botsend(ctx, message):
         await channel.send(message)
     else:
         await ctx.send('**You have no permission to use this command!**')
+        
+@bot.command()
+async def plasmafight(ctx):
+    player1hp = 150
+    player2hp = 150
+    line1 = ''
+    line2 = ''
+    line3 = ''
+    await ctx.send('Sleeping for 10 seconds.)
+    time.sleep(10)
+    await ctx.send('Awake!')
         
 bot.run(os.getenv('TOKEN'))
