@@ -120,7 +120,7 @@ async def botsend(ctx, message):
     staffRole = discord.utils.get(ctx.message.guild.roles, name="Staff")
     if staffRole in authorRoles:
         channel = ctx.message.channel_mentions[0]
-        channel.send(message)
+        await channel.send(message)
     else:
         await ctx.send('**You have no permission to use this command!**')
 bot.run(os.getenv('TOKEN'))
