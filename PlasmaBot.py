@@ -144,16 +144,7 @@ async def plasmafight(ctx):
     embed.add_field(name = 'Player1', value = str(player2hp) + '/150')
     msg = await ctx.send(embed = embed)
     gameNotFinished = True
-    while gameNotFinished:
-        logTime = time.time()
-        while ((time.time() - logTime) < timeWait):
-            await bot.change_presence(status=discord.Status.online, activity=game)
-        await ctx.send("woo hoo.")
-        if player1hp == 0:
-            gameNotFinished = False
-        elif player2hp == 0:
-            gameNotFinished = False
-        await ctx.send('here take a message.')
+    await time.sleep(2)
     await ctx.send("ran already.")
         
 bot.run(os.getenv('TOKEN'))
