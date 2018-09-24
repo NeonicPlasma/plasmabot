@@ -144,7 +144,7 @@ async def plasmafight(ctx):
     embed.add_field(name = 'Player1', value = str(player2hp) + '/150')
     msg = await ctx.send(embed = embed)
     gameNotFinished = True
-    await time.sleep(2)
+    await asyncio.sleep(timeWait)
     await ctx.send("ran already.")
         
 bot.run(os.getenv('TOKEN'))
