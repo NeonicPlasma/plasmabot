@@ -194,6 +194,6 @@ async def plasmafight(ctx):
             newembed.add_field(name = '', value = "**" + line1 + "**")
             embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
             embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
-        await msg.edit('', newembed=embed)
+        await msg.edit(content='', embed=newembed=embed)
         
 bot.run(os.getenv('TOKEN'))
