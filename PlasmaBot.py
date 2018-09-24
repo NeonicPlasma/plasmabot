@@ -135,11 +135,16 @@ async def botsend(ctx, message):
         
 @bot.command()
 async def plasmafight(ctx):
-    timeWait = 2
+    timeWait = 5
     player1hp = 150
     player2hp = 150
-    embed = discord.Embed(title = '', description = '**Plasma Fight: Player1 vs Player 2!**')
+    value = False
+    embed = discord.Embed(title = '', description = '**Plasma Fight: Player1 vs Player 2!**', color = 0x00ff00)
     await ctx.send(embed = embed)
+    logTime = time.time()
+    while ((time.time() - currentTime) > timeWait):
+        value = True
+    await ctx.send('5 seconds have passed!')
     
         
 bot.run(os.getenv('TOKEN'))
