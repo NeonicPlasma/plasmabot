@@ -144,6 +144,7 @@ async def plasmafight(ctx):
     logTime = time.time()
     while ((time.time() - currentTime) < timeWait):
         value = True
+        await ctx.send('ok spam')
     await ctx.send('5 seconds have passed!')
     
         
