@@ -114,7 +114,16 @@ async def bombminigame(ctx, mode):
         await ctx.send('Invalid mode!')
         
 @bot.command()
-async def test(ctx, test):
-    await ctx.send(test)
-        
+async def botsend(ctx, message)
+    author = ctx.message.author
+    authorRoles = author.roles
+    staffRole = discord.utils.get(ctx.message.guild.roles, name="Staff")
+    if staffRole in authorRoles:
+        channel = ctx.message.channel_mentions[0]
+        if channel:
+            channel.send(message)
+        else:
+            await ctx.send('Please specify a channel and try again!')
+    else:
+        await ctx.send('**You have no permission to use this command!**')
 bot.run(os.getenv('TOKEN'))
