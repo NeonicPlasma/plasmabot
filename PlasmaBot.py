@@ -153,7 +153,7 @@ async def plasmafight(ctx):
     embed = discord.Embed(title = '**Plasma Fight: Player1 vs Player 2!**', description = '', color = 0x00ff00)
     embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
     embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
-    msg = await ctx.send(embed = embed)
+    msg = await ctx.send("Plasma Fight!", embed = embed)
     line1 = ''
     line2 = ''
     line3 = ''
@@ -182,7 +182,7 @@ async def plasmafight(ctx):
         elif damageDealt >= 26 and damageDealt <= 30:
             weaponUsed = 'plasma reactor'
             action = ' poisons'
-        line = "Player" + str(turn) + action + " Player" + str(shotAt) + "with a " + weaponUsed + " and deals " + str(damageDealt) + " damage!"
+        line = "Player" + str(turn) + action + " Player" + str(shotAt) + " with a " + weaponUsed + " and deals " + str(damageDealt) + " damage!"
         player1hp = player1hp - 10
         line3 = line2
         line2 = line1
@@ -205,6 +205,6 @@ async def plasmafight(ctx):
             embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
             embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
         await ctx.send(line + "\n" + "hello") 
-        await msg.edit(content='plasma fight!', embed=newembed)
+        await msg.edit('Plasma Fight!', embed=newembed)
         
 bot.run(os.getenv('TOKEN'))
