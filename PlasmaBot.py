@@ -40,9 +40,7 @@ minigameHappening = False
 minigameParticipants = []
 eliminationOrder = []
 
-# Hosting Related Variables:
-queue = []
-currentHost = []
+currentHost = ''
 
 @bot.command()
 async def ask(ctx):
@@ -113,13 +111,24 @@ async def bombminigame(ctx, mode):
     user = ctx.message.author
     userid = user.id
     channel = ctx.message.channel
-    if mode == 'queue':
-        if userid in queue:
-            await ctx.send(user.mention + ' has left the queue!')
-            queue.remove(userid)
+    if mode == 'create':
+        if minigameHappening == False:
+            await ctx.send('**A game of __Pass The Bomb__ has been started!** \nPeople who would like to play can use the `p!bombminigame join` command to participate in the minigame!')
+            minigameHappening = True
+            currentHost = user
         else:
-            await ctx.send(user.mention + ' has been added to the queue!')
-            queue.append(userid)
+            await ctx.send("A minigame is already happening! Please wait until the minigame has finished.")
+    elif mode == 'join':
+        if minigameHappening == True:
+            if userid in minigameParticipants:
+                await ctx.send("**You have quit the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to rejoin, use the `p!bombminigame join` command to participate again.")
+                minigameParticipants.remove(user)
+            else:
+                minigameParticipants.append(user)
+                if len(minigameParticipants) > 1:
+                    await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. " + currentHost.mention + " can now use `p!bombminigame start` to start the minigame! If you would like to quit the minigame, use the `p!bombminigame join` command to quit.")
+                else:
+                    await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to quit the minigame, use the `p!bombminigame join` command to quit.")    
     else:
         await ctx.send('Invalid mode!')
         
