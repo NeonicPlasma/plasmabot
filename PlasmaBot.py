@@ -191,19 +191,19 @@ async def plasmafight(ctx):
         if line3 == '':
             if line2 == '':
                 newembed.add_field(name = '', value = "**" + line1 + "**")
-                embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
-                embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
+                newembed.add_field(name = 'Player1', value = str(player1hp) + '/150')
+                newembed.add_field(name = 'Player2', value = str(player2hp) + '/150')
             else:
                 newembed.add_field(name = '', value = line2)
                 newembed.add_field(name = '', value = "**" + line1 + "**")
-                embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
-                embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
+                newembed.add_field(name = 'Player1', value = str(player1hp) + '/150')
+                newembed.add_field(name = 'Player2', value = str(player2hp) + '/150')
         else:
             newembed.add_field(name = '', value = line3)
             newembed.add_field(name = '', value = line2)
             newembed.add_field(name = '', value = "**" + line1 + "**")
-            embed.add_field(name = 'Player1', value = str(player1hp) + '/150')
-            embed.add_field(name = 'Player2', value = str(player2hp) + '/150')
+            newembed.add_field(name = 'Player1', value = str(player1hp) + '/150')
+            newembed.add_field(name = 'Player2', value = str(player2hp) + '/150')
         await ctx.send(line + "\n" + "hello") 
         await msg.edit('Plasma Fight!', embed=newembed)
         
