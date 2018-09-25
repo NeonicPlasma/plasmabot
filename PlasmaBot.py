@@ -190,18 +190,18 @@ async def plasmafight(ctx):
         newembed = discord.Embed(title = '**Plasma Fight: Player1 vs Player 2!**', description = '', color = 0x00ff00)
         if line3 == '':
             if line2 == '':
-                newembed.add_field(name = '', value = "**" + line1 + "**")
+                newembed.add_field(name = 'a', value = "**" + line1 + "**")
                 newembed.add_field(name = 'Player1', value = str(player1hp) + '/150')
                 newembed.add_field(name = 'Player2', value = str(player2hp) + '/150')
             else:
-                newembed.add_field(name = '', value = line2)
-                newembed.add_field(name = '', value = "**" + line1 + "**")
+                newembed.add_field(name = 'a', value = line2)
+                newembed.add_field(name = 'a', value = "**" + line1 + "**")
                 newembed.add_field(name = 'Player1', value = str(player1hp) + '/150')
                 newembed.add_field(name = 'Player2', value = str(player2hp) + '/150')
         else:
-            newembed.add_field(name = '', value = line3)
-            newembed.add_field(name = '', value = line2)
-            newembed.add_field(name = '', value = "**" + line1 + "**")
+            newembed.add_field(name = 'a', value = line3)
+            newembed.add_field(name = 'a', value = line2)
+            newembed.add_field(name = 'a', value = "**" + line1 + "**")
             newembed.add_field(name = 'Player1', value = str(player1hp) + '/150')
             newembed.add_field(name = 'Player2', value = str(player2hp) + '/150')
         await ctx.send(line + "\n" + "hello") 
