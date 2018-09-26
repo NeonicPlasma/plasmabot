@@ -188,7 +188,7 @@ async def bombminigamepass(ctx, number):
     global holdingBomb
     global equationAnswer
     user = ctx.message.author
-    if user == holdingBomb:
+    if holdingBomb == user:
         personPassedTo = ctx.message.mentions[0]
         if personPassedTo in minigameParticipants:
             if int(number) == equationAnswer:
