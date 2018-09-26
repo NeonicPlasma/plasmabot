@@ -112,9 +112,9 @@ async def bombminigame(ctx, mode):
     userid = user.id
     channel = ctx.message.channel
     global minigameRunning
+    global currentHost
+    global minigameParticipants
     if mode == 'create':
-        await ctx.send('testing testing 123')
-        await ctx.send(str(minigameRunning))
         if minigameRunning == 0:
             await ctx.send('**A game of __Pass The Bomb__ has been started!** \nPeople who would like to play can use the `p!bombminigame join` command to participate in the minigame!')
             minigameRunning = 1
