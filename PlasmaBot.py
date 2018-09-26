@@ -46,7 +46,7 @@ currentHost = ''
 # Bomb Minigame Related Variables:
 
 holdingBomb = None
-equationAnswer = None
+equationAnswer = 0
 
 def sayBomb()
     global holdingBomb
@@ -177,8 +177,6 @@ async def bombminigame(ctx, mode):
                 holdingBomb = startBomb
                 sayBomb()
                 timer()
-                
-                
     else:
         await ctx.send('Invalid mode!')
 
