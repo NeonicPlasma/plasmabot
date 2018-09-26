@@ -36,7 +36,6 @@ bot.remove_command('help')
 
 # Minigame Related Variables:
 
-minigameRunning = 0
 minigameParticipants = []
 eliminationOrder = []
 
@@ -111,17 +110,18 @@ async def bombminigame(ctx, mode):
     user = ctx.message.author
     userid = user.id
     channel = ctx.message.channel
+    global minigameRunning
     if mode == 'create':
         await ctx.send('testing testing 123')
         await ctx.send(str(minigameRunning))
-        if global minigameRunning == 0:
+        if minigameRunning == 0:
             await ctx.send('**A game of __Pass The Bomb__ has been started!** \nPeople who would like to play can use the `p!bombminigame join` command to participate in the minigame!')
             global minigameRunning = 1
             currentHost = user
         else:
             await ctx.send("A minigame is already happening! Please wait until the minigame has finished.")
     elif mode == 'join':
-        if global minigameRunning == 1:
+        if minigameRunning == 1:
             if userid in minigameParticipants:
                 await ctx.send("**You have quit the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to rejoin, use the `p!bombminigame join` command to participate again.")
                 minigameParticipants.remove(user)
