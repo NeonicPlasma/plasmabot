@@ -57,12 +57,12 @@ equationAnswer = 0
   #  equationAnswer = equation1 + equation2
    # await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
     
-#async def timer()
- #   amountOfTime = random.randint(35, 65)
-  #  await asyncio.sleep(amountOfTime)
-   # global holdingBomb
-    #minigameScreenChannel = bot.get_channel(492771187332481034)
-    #await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
+async def timer()
+    amountOfTime = random.randint(35, 65)
+    await asyncio.sleep(amountOfTime)
+    global holdingBomb
+    minigameScreenChannel = bot.get_channel(492771187332481034)
+    await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
     
 @bot.command()
 async def ask(ctx):
@@ -175,8 +175,8 @@ async def bombminigame(ctx, mode):
                 await asyncio.sleep(5)
                 await minigameScreenChannel.send("**GO!**")
                 holdingBomb = startBomb
-                sayBomb()
-                timer()
+                await sayBomb()
+                await timer()
     else:
         await ctx.send('Invalid mode!')
 
@@ -193,7 +193,7 @@ async def bombminigamepass(ctx, number):
         if personPassedTo in minigameParticipants:
             if int(number) == equationAnswer:
                 holdingBomb = personPassedTo
-                sayBomb()
+                await sayBomb()
             else:
                 await ctx.send("**Wrong Answer!** Try again.")
         else:
