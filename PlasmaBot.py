@@ -39,9 +39,31 @@ bot.remove_command('help')
 minigameParticipants = []
 eliminationOrder = []
 minigameRunning = 0
+minigamePlaying = 0
 
 currentHost = ''
 
+# Bomb Minigame Related Variables:
+
+holdingBomb = None
+equationAnswer = None
+
+def sayBomb()
+    global holdingBomb
+    global equationAnswer
+    minigameLoungeChannel = bot.get_channel(492771206500712448)
+    equation1 = random.randint(1, 50)
+    equation2 = random.randint(1, 50)
+    equationAnswer = equation1 + equation2
+    await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
+    
+def timer()
+    amountOfTime = random.randint(35, 65)
+    await asyncio.sleep(amountOfTime)
+    global holdingBomb
+    minigameScreenChannel = bot.get_channel(492771187332481034)
+    await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
+    
 @bot.command()
 async def ask(ctx):
     possibleresponses = [
@@ -111,9 +133,13 @@ async def bombminigame(ctx, mode):
     user = ctx.message.author
     userid = user.id
     channel = ctx.message.channel
+    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
     global minigameRunning
     global currentHost
     global minigameParticipants
+    global minigamePlaying
+    global holdingBomb
+    minigameScreenChannel = bot.get_channel(492771187332481034)
     if mode == 'create':
         if minigameRunning == 0:
             await ctx.send('**A game of __Pass The Bomb__ has been started!** \nPeople who would like to play can use the `p!bombminigame join` command to participate in the minigame!')
@@ -123,18 +149,60 @@ async def bombminigame(ctx, mode):
             await ctx.send("A minigame is already happening! Please wait until the minigame has finished.")
     elif mode == 'join':
         if minigameRunning == 1:
-            if user in minigameParticipants:
-                await ctx.send("**You have quit the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to rejoin, use the `p!bombminigame join` command to participate again.")
-                minigameParticipants.remove(user)
-            else:
-                minigameParticipants.append(user)
-                if len(minigameParticipants) > 1:
-                    await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. " + currentHost.mention + " can now use `p!bombminigame start` to start the minigame! If you would like to quit the minigame, use the `p!bombminigame join` command to quit.")
+            if minigamePlaying == 0:
+                if user in minigameParticipants:
+                    minigameParticipants.remove(user)
+                    await ctx.send("**You have quit the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to rejoin, use the `p!bombminigame join` command to participate again.")
+                    user.remove_roles(minigameRole)
                 else:
-                    await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to quit the minigame, use the `p!bombminigame join` command to quit.")    
+                    minigameParticipants.append(user)
+                    user.add_roles(minigameRole)
+                    if len(minigameParticipants) > 1:
+                        await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. " + currentHost.mention + " can now use `p!bombminigame start` to start the minigame! If you would like to quit the minigame, use the `p!bombminigame join` command to quit.")
+                    else:
+                        await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to quit the minigame, use the `p!bombminigame join` command to quit.") 
+            else:
+                await ctx.send("You cannot join or quit while a minigame is in progress!")
+        else:
+            await ctx.send("**A minigame is not running!** To create one, use the command `p!bombminigame create`.")
+    elif mode == 'start':
+        if user == currentHost:
+            if len(minigameParticipants > 1):
+                await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
+                await asyncio.sleep(10)
+                startBomb = random.choice(minigameParticipants)
+                await minigameScreenChannel.send("**Round 1**\n For this round, the bomb will start with " + startbomb.mention + ". Round starts in 5 seconds..."
+                await asyncio.sleep(5)
+                await minigameScreenChannel.send("**GO!**")
+                holdingBomb = startBomb
+                sayBomb()
+                timer()
+                
+                
     else:
         await ctx.send('Invalid mode!')
-        
+
+@bot.command()
+async def bombminigamepass(ctx, number):
+    global minigameRunning
+    global minigameParticipants
+    global minigamePlaying
+    global holdingBomb
+    global equationAnswer
+    user = ctx.message.author
+    if user == holdingBomb:
+        personPassedTo = ctx.message.mentions[0]
+        if personPassedTo in minigameParticipants:
+            if int(number) == equationAnswer:
+                holdingBomb = personPassedTo
+                sayBomb()
+            else:
+                await ctx.send("**Wrong Answer!** Try again.")
+        else:
+            await ctx.send("This person isn't a contestant. Pass it to someone else.")
+    else:
+        await ctx.send("You aren't holding the bomb!")
+                                                 
 @bot.command()
 async def botsend(ctx, message):
     author = ctx.message.author
