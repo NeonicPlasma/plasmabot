@@ -123,7 +123,7 @@ async def bombminigame(ctx, mode):
             await ctx.send("A minigame is already happening! Please wait until the minigame has finished.")
     elif mode == 'join':
         if minigameRunning == 1:
-            if userid in minigameParticipants:
+            if user in minigameParticipants:
                 await ctx.send("**You have quit the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to rejoin, use the `p!bombminigame join` command to participate again.")
                 minigameParticipants.remove(user)
             else:
