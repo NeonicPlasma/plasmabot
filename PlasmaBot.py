@@ -171,7 +171,7 @@ async def bombminigame(ctx, mode):
                 await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
                 await asyncio.sleep(10)
                 startBomb = random.choice(minigameParticipants)
-                await minigameScreenChannel.send("**Round 1**\n For this round, the bomb will start with " + startbomb.mention + ". Round starts in 5 seconds..."
+                await minigameScreenChannel.send("**Round 1**\n For this round, the bomb will start with " + startbomb.mention + ". Round starts in 5 seconds...")
                 await asyncio.sleep(5)
                 await minigameScreenChannel.send("**GO!**")
                 holdingBomb = startBomb
