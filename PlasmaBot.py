@@ -38,6 +38,7 @@ bot.remove_command('help')
 
 minigameParticipants = []
 eliminationOrder = []
+minigameRunning = 0
 
 currentHost = ''
 
@@ -116,7 +117,7 @@ async def bombminigame(ctx, mode):
         await ctx.send(str(minigameRunning))
         if minigameRunning == 0:
             await ctx.send('**A game of __Pass The Bomb__ has been started!** \nPeople who would like to play can use the `p!bombminigame join` command to participate in the minigame!')
-            global minigameRunning = 1
+            minigameRunning = 1
             currentHost = user
         else:
             await ctx.send("A minigame is already happening! Please wait until the minigame has finished.")
