@@ -60,8 +60,8 @@ equationAnswer = 0
 async def timer()
     amountOfTime = random.randint(35, 65)
     #await asyncio.sleep(amountOfTime)
-    global holdingBomb
-    minigameScreenChannel = bot.get_channel(492771187332481034)
+    #global holdingBomb
+    #minigameScreenChannel = bot.get_channel(492771187332481034)
     #await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
     
 @bot.command()
