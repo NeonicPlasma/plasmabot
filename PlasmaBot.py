@@ -57,9 +57,8 @@ equationAnswer = 0
   #  equationAnswer = equation1 + equation2
    # await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
     
-@asyncio.coroutine
 async def timer()
-    amountOfTime = random.randint(35, 65)
+    #amountOfTime = random.randint(35, 65)
     await asyncio.sleep(amountOfTime)
     global holdingBomb
     minigameScreenChannel = bot.get_channel(492771187332481034)
