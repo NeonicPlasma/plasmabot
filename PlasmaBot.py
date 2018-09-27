@@ -134,7 +134,7 @@ async def timer(guild):
     else:
         await minigameScreenChannel.send("**" + str(len(minigameParticipants)) + "** contestants remain! Next round starting in 15 seconds!")
         await asyncio.sleep(15)
-        await startNewRound(guild)
+        await startNewBombRound(guild)
     
 @bot.command()
 async def ask(ctx):
