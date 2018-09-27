@@ -76,9 +76,12 @@ async def timer():
     minigameParticipants.remove(holdingBomb)
     minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
     eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
+    await minigameScreenChannel.send("testing testing 123")
     await holdingBomb.remove_roles(minigameRole)
+    await minigameScreenChannel.send("testing testing 123")
     await holdingBomb.add_roles(eliminatedRole)
     if len(minigameParticipants) == 1:
+        await minigameScreenChannel.send("testing testing 123")
         winner = minigameParticipants[0]
         await minigameScreenChannel.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy: **Minigame ends in 10 seconds.**")
         await asyncio.sleep(10)
