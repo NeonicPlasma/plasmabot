@@ -102,11 +102,12 @@ async def timer(guild):
             await player.remove_roles(minigameRole)
         for player in eliminatedRole.members:
             await player.remove_roles(eliminatedRole)
-        logMessage = "**Congratulations to " + winner.mention " for winning __Pass The Bomb!__\n1: " + winner.mention + "**"
-        #placing = 2
-        #for player in eliminationOrder:
-         #   localMessage = "\n" + str(placing) + ": " + player.mention
-          #  logMessage += localMessage
+        logMessage = "**Congratulations to " + winner.mention + " for winning __Pass The Bomb!__\n1: " + winner.mention + "**"
+        placing = 2
+        for player in eliminationOrder:
+            localMessage = "\n" + str(placing) + ": " + player.mention
+            logMessage += localMessage
+            placing += 1
         await minigameHistoryChannel.send(logMessage)
         minigameParticipants = []
         eliminationOrder = []
