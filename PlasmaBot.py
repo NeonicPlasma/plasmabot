@@ -42,7 +42,7 @@ eliminationOrder = []
 minigameRunning = 0
 minigamePlaying = 0
 
-currentHost = ''
+currentHost = None
 
 roundNumber = 0
 
@@ -50,6 +50,21 @@ roundNumber = 0
 
 holdingBomb = None
 equationAnswer = 0
+
+async def cancelMinigame(guild):
+    global holdingBomb
+    global eliminationOrder
+    global minigameParticipants
+    global roundNumber
+    global minigameRunning
+    global minigamePlaying
+    global currentHost
+    minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
+    for player in minigameRole.members:
+        await player.remove_roles(minigameRole)
+    minigameParticipants = []
+    minigameRunning = 0
+    currentHost = None
 
 async def startNewBombRound(guild):
     global roundNumber
@@ -81,6 +96,7 @@ async def timer(guild):
     global roundNumber
     global minigameRunning
     global minigamePlaying
+    global currentHost
     minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
     eliminatedRole = discord.utils.get(guild.roles, name='Eliminated Participants')
     await asyncio.sleep(1)
@@ -114,6 +130,7 @@ async def timer(guild):
         roundNumber = 0
         minigameRunning = 0
         minigamePlaying = 0
+        currentHost = None
     else:
         await minigameScreenChannel.send("**" + str(len(minigameParticipants)) + "** contestants remain! Next round starting in 15 seconds!")
         await asyncio.sleep(15)
@@ -240,6 +257,21 @@ async def bombminigame(ctx, mode):
                     await ctx.send("A minigame is already being played!")
             else:
                 await ctx.send("You need at least 2 people to start this minigame!")
+    elif mode == 'cancel':
+        if minigameRunning == 1:
+            if currentHost == user:
+                if isinstance(ctx.message.channel, discord.DMChannel):
+                    if minigamePlaying == 0:
+                        await ctx.send("Minigame has been cancelled.")
+                        await cancelminigame(ctx.message.guild)
+                    else:
+                        await ctx.send("You cannot cancel the minigame if it has already started!")
+                else:
+                    await ctx.send("You can only use this in DMs.")
+            else:
+                await ctx.send("You are not the host!")
+        else:
+            await ctx.send("There is no minigame going on right now! To start one, use `p!bombminigame create`.")
     else:
         await ctx.send('Invalid mode!')
 
