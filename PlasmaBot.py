@@ -57,13 +57,12 @@ equationAnswer = 0
   #  equationAnswer = equation1 + equation2
    # await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
     
-#async def timer()
-    #pass
-    #amountOfTime = random.randint(35, 65)
-    #await asyncio.sleep(amountOfTime)
-    #global holdingBomb
-    #minigameScreenChannel = bot.get_channel(492771187332481034)
-    #await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
+async def timer()
+    global holdingBomb
+    amountOfTime = random.randint(35, 65)
+    await asyncio.sleep(amountOfTime)
+    minigameScreenChannel = bot.get_channel(492771187332481034)
+    await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
     
 @bot.command()
 async def ask(ctx):
@@ -168,7 +167,7 @@ async def bombminigame(ctx, mode):
             await ctx.send("**A minigame is not running!** To create one, use the command `p!bombminigame create`.")
     elif mode == 'start':
         if user == currentHost:
-            if len(minigameParticipants > 1):
+            if len(minigameParticipants) > 1using:
                 await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
                 await asyncio.sleep(10)
                 startBomb = random.choice(minigameParticipants)
