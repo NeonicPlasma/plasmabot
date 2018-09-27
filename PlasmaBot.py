@@ -61,15 +61,15 @@ async def sayBomb():
     await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
     
     
-async def timer():
+async def timer(guild):
     global holdingBomb
     global eliminationOrder
     global minigameParticipants
     global roundNumber
     global minigameRunning
     global minigamePlaying
-    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
-    eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
+    minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
+    eliminatedRole = discord.utils.get(guild.roles, name='Eliminated Participants')
     await asyncio.sleep(1)
     amountOfTime = random.randint(70, 100)
     await asyncio.sleep(amountOfTime)
@@ -216,7 +216,7 @@ async def bombminigame(ctx, mode):
                     await minigameScreenChannel.send("**GO!**")
                     holdingBomb = startBomb
                     await sayBomb()
-                    await timer()
+                    await timer(ctx.message.guild)
                 else:
                     await ctx.send("A minigame is already being played!")
             else:
