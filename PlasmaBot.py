@@ -18,10 +18,6 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
-    eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
-    minigameLoungeChannel = bot.get_channel(492771206500712448)
-    minigameLoungeChannel.send(eliminatedRole.name)
     
 
 @bot.event
