@@ -77,7 +77,7 @@ async def timer():
     minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
     eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
     await holdingBomb.remove_roles(minigameRole)
-    await holdingBomb.give_roles(eliminatedRole)
+    await holdingBomb.add_roles(eliminatedRole)
     if len(minigameParticipants) == 1:
         winner = minigameParticipants[0]
         await minigameScreenChannel.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy: **Minigame ends in 10 seconds.**")
@@ -230,22 +230,25 @@ async def bombminigamepass(ctx, number):
     user = ctx.message.author
     if holdingBomb == user:
         personPassedTo = ctx.message.mentions[0]
-        if personPassedTo in minigameParticipants:
-            integerExists = True
-            try:
-                int(number)
-            except ValueError:
-                integerExists = False
-            if integerExists == True:
-                if int(number) == equationAnswer:
-                    holdingBomb = personPassedTo
-                    await sayBomb()
+        if personPassedTo:
+            if personPassedTo in minigameParticipants:
+                integerExists = True
+                try:
+                    int(number)
+                except ValueError:
+                    integerExists = False
+                if integerExists == True:
+                    if int(number) == equationAnswer:
+                        holdingBomb = personPassedTo
+                        await sayBomb()
+                    else:
+                        await ctx.send("**Wrong Answer!** Try again.")
                 else:
-                    await ctx.send("**Wrong Answer!** Try again.")
+                    await ctx.send("Make sure the number is an integer, a whole number!")
             else:
-                await ctx.send("Make sure the number is an integer, a whole number!")
+                await ctx.send("This person isn't a contestant. Pass it to someone else.")
         else:
-            await ctx.send("This person isn't a contestant. Pass it to someone else.")
+            await ctx.send("You need to mention the person you are passing it to in your command!")
     else:
         await ctx.send("You aren't holding the bomb!")
                                                  
