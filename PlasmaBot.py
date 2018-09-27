@@ -71,9 +71,9 @@ async def timer():
     minigameParticipants.remove(holdingBomb)
     if len(minigameParticipants) == 1:
         winner = minigameParticipants[0]
-        await ctx.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy:")
+        await minigameScreenChannel.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy:")
     else:
-        await ctx.send("**" + str(len(minigameParticipants)) + "** contestants remain! Next round starting in 15 seconds!")
+        await minigameScreenChannel.send("**" + str(len(minigameParticipants)) + "** contestants remain! Next round starting in 15 seconds!")
     
     
 @bot.command()
