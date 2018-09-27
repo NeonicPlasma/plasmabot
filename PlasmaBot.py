@@ -76,7 +76,7 @@ async def timer():
     minigameScreenChannel = bot.get_channel(492771187332481034)
     minigameHistoryChannel = bot.get_channel(494751892874854421)
     await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
-    minigameParticipants.remove(holdingBomb
+    minigameParticipants.remove(holdingBomb)
     await minigameScreenChannel.send("testing testing 123")
     await holdingBomb.remove_roles(minigameRole)
     await minigameScreenChannel.send("testing testing 123")
