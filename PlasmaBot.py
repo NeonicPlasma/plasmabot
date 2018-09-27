@@ -43,6 +43,8 @@ minigamePlaying = 0
 
 currentHost = ''
 
+roundNumber = 0
+
 # Bomb Minigame Related Variables:
 
 holdingBomb = None
@@ -57,13 +59,24 @@ async def sayBomb():
     equationAnswer = equation1 + equation2
     await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
     
+async def sayBomb():
+    global holdingBomb
+    global minigameParticipants
+    
+    
 async def timer():
     global holdingBomb
+    global eliminationOrder
     await asyncio.sleep(1)
-    amountOfTime = random.randint(35, 65)
+    amountOfTime = random.randint(70, 100)
     await asyncio.sleep(amountOfTime)
     minigameScreenChannel = bot.get_channel(492771187332481034)
     await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
+    await minigameParticipants.remove(holdingBomb)
+    if len(minigameParticipants) == 1:
+        winner = minigameParticipants[0]
+        await ctx.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy:")
+    
     
 @bot.command()
 async def ask(ctx):
@@ -140,6 +153,7 @@ async def bombminigame(ctx, mode):
     global minigameParticipants
     global minigamePlaying
     global holdingBomb
+    global roundNumber
     minigameScreenChannel = bot.get_channel(492771187332481034)
     if mode == 'create':
         if minigameRunning == 0:
@@ -173,6 +187,7 @@ async def bombminigame(ctx, mode):
                     await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
                     await asyncio.sleep(10)
                     startBomb = random.choice(minigameParticipants)
+                    roundNumber = 1
                     await minigameScreenChannel.send("**Round 1**\n For this round, the bomb will start with " + startBomb.mention + ". Round starts in 5 seconds...")
                     await asyncio.sleep(5)
                     await minigameScreenChannel.send("**GO!**")
