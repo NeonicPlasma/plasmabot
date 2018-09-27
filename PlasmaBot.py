@@ -182,7 +182,7 @@ async def bombminigame(ctx, mode):
                 else:
                     await ctx.send("A minigame is already being played!")
             else:
-                await ctx.send("You need at least 2 people to play this minigame!")
+                await ctx.send("You need at least 2 people to start this minigame!")
     else:
         await ctx.send('Invalid mode!')
 
@@ -197,11 +197,19 @@ async def bombminigamepass(ctx, number):
     if holdingBomb == user:
         personPassedTo = ctx.message.mentions[0]
         if personPassedTo in minigameParticipants:
-            if int(number) == equationAnswer:
-                holdingBomb = personPassedTo
-                await sayBomb()
+            integerExists = True
+            try:
+                int(element)
+            except ValueError:
+                integerExists = False
+            if integerExists == True:
+                if int(number) == equationAnswer:
+                    holdingBomb = personPassedTo
+                    await sayBomb()
+                else:
+                    await ctx.send("**Wrong Answer!** Try again.")
             else:
-                await ctx.send("**Wrong Answer!** Try again.")
+                await ctx.send("Make sure the number is an integer, a whole number!")
         else:
             await ctx.send("This person isn't a contestant. Pass it to someone else.")
     else:
