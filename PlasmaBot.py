@@ -63,15 +63,35 @@ async def sayBomb():
 async def timer():
     global holdingBomb
     global eliminationOrder
+    global minigameParticipants
+    global roundNumber
+    global minigameRunning
+    global minigamePlaying
     await asyncio.sleep(1)
     amountOfTime = random.randint(70, 100)
     await asyncio.sleep(amountOfTime)
     minigameScreenChannel = bot.get_channel(492771187332481034)
+    minigameHistoryChannel = bot.get_channel(494751892874854421)
     await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
     minigameParticipants.remove(holdingBomb)
+    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
+    eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
+    await holdingBomb.remove_roles(minigameRole)
+    await holdingBomb.give_roles(eliminatedRole)
     if len(minigameParticipants) == 1:
         winner = minigameParticipants[0]
-        await minigameScreenChannel.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy:")
+        await minigameScreenChannel.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy: **Minigame ends in 10 seconds.**")
+        await asyncio.sleep(10)
+        for player in minigameRole.members:
+            await player.remove_roles(minigameRole)
+        for player in eliminatedRole.members:
+            await player.remove_roles(eliminatedRole)
+        minigameParticipants = []
+        eliminationOrder = []
+        holdingBomb = None
+        roundNumber = 0
+        minigameRunning = 0
+        minigamePlaying = 0
     else:
         await minigameScreenChannel.send("**" + str(len(minigameParticipants)) + "** contestants remain! Next round starting in 15 seconds!")
     
@@ -182,6 +202,7 @@ async def bombminigame(ctx, mode):
         if user == currentHost:
             if len(minigameParticipants) > 1:
                 if minigamePlaying == 0:
+                    minigamePlaying = 1
                     await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
                     await asyncio.sleep(10)
                     startBomb = random.choice(minigameParticipants)
