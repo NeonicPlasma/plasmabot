@@ -48,22 +48,22 @@ currentHost = ''
 holdingBomb = None
 equationAnswer = 0
 
-#async def sayBomb()
- #   global holdingBomb
-  #  global equationAnswer
-   # minigameLoungeChannel = bot.get_channel(492771206500712448)
-    #equation1 = random.randint(1, 50)
-   # equation2 = random.randint(1, 50)
-  #  equationAnswer = equation1 + equation2
-   # await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
+async def sayBomb():
+    global holdingBomb
+    global equationAnswer
+    minigameLoungeChannel = bot.get_channel(492771206500712448)
+    equation1 = random.randint(1, 50)
+    equation2 = random.randint(1, 50)
+    equationAnswer = equation1 + equation2
+    await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
     
-async def timer()
+async def timer():
     global holdingBomb
     await asyncio.sleep(1)
-    #amountOfTime = random.randint(35, 65)
-    #await asyncio.sleep(amountOfTime)
-    #minigameScreenChannel = bot.get_channel(492771187332481034)
-    #await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
+    amountOfTime = random.randint(35, 65)
+    await asyncio.sleep(amountOfTime)
+    minigameScreenChannel = bot.get_channel(492771187332481034)
+    await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
     
 @bot.command()
 async def ask(ctx):
