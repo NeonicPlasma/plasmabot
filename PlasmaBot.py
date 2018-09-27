@@ -169,15 +169,20 @@ async def bombminigame(ctx, mode):
     elif mode == 'start':
         if user == currentHost:
             if len(minigameParticipants) > 1:
-                await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
-                await asyncio.sleep(10)
-                startBomb = random.choice(minigameParticipants)
-                await minigameScreenChannel.send("**Round 1**\n For this round, the bomb will start with " + startbomb.mention + ". Round starts in 5 seconds...")
-                await asyncio.sleep(5)
-                await minigameScreenChannel.send("**GO!**")
-                holdingBomb = startBomb
-                await sayBomb()
-                await timer()
+                if minigamePlaying == 0:
+                    await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
+                    await asyncio.sleep(10)
+                    startBomb = random.choice(minigameParticipants)
+                    await minigameScreenChannel.send("**Round 1**\n For this round, the bomb will start with " + startBomb.mention + ". Round starts in 5 seconds...")
+                    await asyncio.sleep(5)
+                    await minigameScreenChannel.send("**GO!**")
+                    holdingBomb = startBomb
+                    await sayBomb()
+                    await timer()
+                else:
+                    await ctx.send("A minigame is already being played!")
+            else:
+                await ctx.send("You need at least 2 people to play this minigame!")
     else:
         await ctx.send('Invalid mode!')
 
