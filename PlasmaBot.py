@@ -68,10 +68,12 @@ async def timer():
     await asyncio.sleep(amountOfTime)
     minigameScreenChannel = bot.get_channel(492771187332481034)
     await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
-    await minigameParticipants.remove(holdingBomb)
+    minigameParticipants.remove(holdingBomb)
     if len(minigameParticipants) == 1:
         winner = minigameParticipants[0]
         await ctx.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy:")
+    else:
+        await ctx.send("**" + str(len(minigameParticipants)) + "** contestants remain! Next round starting in 15 seconds!")
     
     
 @bot.command()
@@ -164,10 +166,10 @@ async def bombminigame(ctx, mode):
                 if user in minigameParticipants:
                     minigameParticipants.remove(user)
                     await ctx.send("**You have quit the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to rejoin, use the `p!bombminigame join` command to participate again.")
-                    user.remove_roles(minigameRole)
+                    await user.remove_roles(minigameRole)
                 else:
                     minigameParticipants.append(user)
-                    user.add_roles(minigameRole)
+                    await user.add_roles(minigameRole)
                     if len(minigameParticipants) > 1:
                         await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. " + currentHost.mention + " can now use `p!bombminigame start` to start the minigame! If you would like to quit the minigame, use the `p!bombminigame join` command to quit.")
                     else:
