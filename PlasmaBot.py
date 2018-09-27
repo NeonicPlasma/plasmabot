@@ -329,4 +329,11 @@ async def plasmafight(ctx):
         await ctx.send(line + "\n" + "hello") 
         await msg.edit('Plasma Fight!', embed=newembed)
         
+@bot.command()
+async def test(ctx):
+    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
+    eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
+    await ctx.send(str(minigameRole.id))
+    await ctx.send(str(eliminatedRole.id))
+        
 bot.run(os.getenv('TOKEN'))
