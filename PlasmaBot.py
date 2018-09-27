@@ -56,7 +56,7 @@ async def startNewBombRound(guild):
     global minigameParticipants
     global holdingBomb
     startBomb = random.choice(minigameParticipants)
-    roundNumber = roundNumber + 1
+    roundNumber += 1
     await minigameScreenChannel.send("**Round " + str(roundNumber) + "**\nFor this round, the bomb will start with " + startBomb.mention + ". Round starts in 5 seconds...")
     await asyncio.sleep(5)
     await minigameScreenChannel.send("**GO!**")
@@ -103,10 +103,10 @@ async def timer(guild):
         for player in eliminatedRole.members:
             await player.remove_roles(eliminatedRole)
         logMessage = "**Congratulations to " + winner.mention " for winning __Pass The Bomb!__\n1: " + winner.mention + "**"
-        placing = 2
-        for player in eliminationOrder:
-            localMessage = "\n" + str(placing) + ": " + player.mention
-            logMessage = logMessage + localMessage
+        #placing = 2
+        #for player in eliminationOrder:
+         #   localMessage = "\n" + str(placing) + ": " + player.mention
+          #  logMessage += localMessage
         await minigameHistoryChannel.send(logMessage)
         minigameParticipants = []
         eliminationOrder = []
