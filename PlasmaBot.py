@@ -59,10 +59,11 @@ equationAnswer = 0
     
 async def timer()
     global holdingBomb
-    amountOfTime = random.randint(35, 65)
-    await asyncio.sleep(amountOfTime)
-    minigameScreenChannel = bot.get_channel(492771187332481034)
-    await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
+    await asyncio.sleep(1)
+    #amountOfTime = random.randint(35, 65)
+    #await asyncio.sleep(amountOfTime)
+    #minigameScreenChannel = bot.get_channel(492771187332481034)
+    #await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
     
 @bot.command()
 async def ask(ctx):
