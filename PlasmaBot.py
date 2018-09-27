@@ -59,10 +59,6 @@ async def sayBomb():
     equationAnswer = equation1 + equation2
     await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
     
-async def sayBomb():
-    global holdingBomb
-    global minigameParticipants
-    
     
 async def timer():
     global holdingBomb
