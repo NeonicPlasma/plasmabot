@@ -18,6 +18,11 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
+    eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
+    minigameLoungeChannel = bot.get_channel(492771206500712448)
+    minigameLoungeChannel.send(eliminatedRole.name)
+    
 
 @bot.event
 async def on_member_join(member):
@@ -67,15 +72,15 @@ async def timer():
     global roundNumber
     global minigameRunning
     global minigamePlaying
+    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
+    eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
     await asyncio.sleep(1)
     amountOfTime = random.randint(70, 100)
     await asyncio.sleep(amountOfTime)
     minigameScreenChannel = bot.get_channel(492771187332481034)
     minigameHistoryChannel = bot.get_channel(494751892874854421)
     await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
-    minigameParticipants.remove(holdingBomb)
-    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
-    eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
+    minigameParticipants.remove(holdingBomb
     await minigameScreenChannel.send("testing testing 123")
     await holdingBomb.remove_roles(minigameRole)
     await minigameScreenChannel.send("testing testing 123")
