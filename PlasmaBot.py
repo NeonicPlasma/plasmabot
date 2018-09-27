@@ -51,6 +51,19 @@ roundNumber = 0
 holdingBomb = None
 equationAnswer = 0
 
+async def startNewBombRound(guild):
+    global roundNumber
+    global minigameParticipants
+    global holdingBomb
+    startBomb = random.choice(minigameParticipants)
+    roundNumber = roundNumber + 1
+    await minigameScreenChannel.send("**Round " + str(roundNumber) + "**\nFor this round, the bomb will start with " + startBomb.mention + ". Round starts in 5 seconds...")
+    await asyncio.sleep(5)
+    await minigameScreenChannel.send("**GO!**")
+    holdingBomb = startBomb
+    await sayBomb()
+    await timer(guild)
+
 async def sayBomb():
     global holdingBomb
     global equationAnswer
@@ -77,12 +90,11 @@ async def timer(guild):
     minigameHistoryChannel = bot.get_channel(494751892874854421)
     await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
     minigameParticipants.remove(holdingBomb)
-    await minigameScreenChannel.send("testing testing 123")
     await holdingBomb.remove_roles(minigameRole)
-    await minigameScreenChannel.send("testing testing 123")
     await holdingBomb.add_roles(eliminatedRole)
+    eliminationOrder = [holdingBomb] + eliminationOrder
+    holdingBomb = None
     if len(minigameParticipants) == 1:
-        await minigameScreenChannel.send("testing testing 123")
         winner = minigameParticipants[0]
         await minigameScreenChannel.send("**" + winner.mention + " wins __Pass The Bomb!__** Congratulations! :trophy: **Minigame ends in 10 seconds.**")
         await asyncio.sleep(10)
@@ -90,15 +102,21 @@ async def timer(guild):
             await player.remove_roles(minigameRole)
         for player in eliminatedRole.members:
             await player.remove_roles(eliminatedRole)
+        logMessage = "**Congratulations to " + winner.mention " for winning __Pass The Bomb!__\n1: " + winner.mention + "**"
+        placing = 2
+        for player in eliminationOrder
+            localMessage = "\n" + str(placing) + ": " + player.mention
+            logMessage = logMessage + localMessage
+        await minigameHistoryChannel.send(logMessage)
         minigameParticipants = []
         eliminationOrder = []
-        holdingBomb = None
         roundNumber = 0
         minigameRunning = 0
         minigamePlaying = 0
     else:
         await minigameScreenChannel.send("**" + str(len(minigameParticipants)) + "** contestants remain! Next round starting in 15 seconds!")
-    
+        await asyncio.sleep(15)
+        await startNewRound(guild)
     
 @bot.command()
 async def ask(ctx):
@@ -328,12 +346,5 @@ async def plasmafight(ctx):
             newembed.add_field(name = 'Player2', value = str(player2hp) + '/150')
         await ctx.send(line + "\n" + "hello") 
         await msg.edit('Plasma Fight!', embed=newembed)
-        
-@bot.command()
-async def test(ctx):
-    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
-    eliminatedRole = discord.utils.get(ctx.message.guild.roles, name='Eliminated Participants')
-    await ctx.send(str(minigameRole.id))
-    await ctx.send(str(eliminatedRole.id))
         
 bot.run(os.getenv('TOKEN'))
