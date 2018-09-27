@@ -210,7 +210,7 @@ async def bombminigamepass(ctx, number):
         if personPassedTo in minigameParticipants:
             integerExists = True
             try:
-                int(element)
+                int(number)
             except ValueError:
                 integerExists = False
             if integerExists == True:
