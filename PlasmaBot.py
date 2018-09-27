@@ -86,7 +86,7 @@ async def sayBomb():
     equation1 = random.randint(1, 50)
     equation2 = random.randint(1, 50)
     equationAnswer = equation1 + equation2
-    await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bombminigamepass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
+    await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bpass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
     
     
 async def timer(guild):
@@ -276,7 +276,7 @@ async def bombminigame(ctx, mode):
         await ctx.send('Invalid mode!')
 
 @bot.command()
-async def bombminigamepass(ctx, number):
+async def bpass(ctx, number):
     global minigameRunning
     global minigameParticipants
     global minigamePlaying
