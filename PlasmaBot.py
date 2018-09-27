@@ -168,7 +168,7 @@ async def bombminigame(ctx, mode):
             await ctx.send("**A minigame is not running!** To create one, use the command `p!bombminigame create`.")
     elif mode == 'start':
         if user == currentHost:
-            if len(minigameParticipants) > 1using:
+            if len(minigameParticipants) > 1:
                 await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
                 await asyncio.sleep(10)
                 startBomb = random.choice(minigameParticipants)
