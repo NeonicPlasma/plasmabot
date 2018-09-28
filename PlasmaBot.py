@@ -401,8 +401,7 @@ async def countsubmit(ctx, number):
     if countingEmojiPeriod:
         if user in minigameParticipants:
             if int(number) == amountOfEmoji:
-                minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**."
-                
+                minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**.")    
         else:
             await ctx.send("You are not participating in this minigame!")
                                                  
