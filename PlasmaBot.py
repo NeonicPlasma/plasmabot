@@ -408,6 +408,6 @@ async def plasmafight(ctx):
         
 @bot.command()
 async def emojitest(ctx)
-    await ctx.send("<:" + BookYellow + ":495145295559000066>")
+    await ctx.send("<:BookYellow:495145295559000066>")
         
 bot.run(os.getenv('TOKEN'))
