@@ -67,6 +67,7 @@ async def cancelMinigame(guild):
     currentHost = None
 
 async def startNewBombRound(guild):
+    minigameScreenChannel = bot.get_channel(492771187332481034)
     global roundNumber
     global minigameParticipants
     global holdingBomb
