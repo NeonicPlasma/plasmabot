@@ -388,7 +388,7 @@ async def countsubmit(ctx, number):
                 await ctx.send(user.mention + " is correct!")
                 scores[user.id] += 1
                 pointCount = scores[user.id]
-                await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**. They now have " + str(scoreCount) + " points.")  
+                await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**. They now have " + str(pointCount) + " points.")  
                 amountOfEmoji = 0
                 await minigameScreenChannel.send("Next round in 10 seconds.")
                 await asyncio.sleep(10)
