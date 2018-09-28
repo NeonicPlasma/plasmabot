@@ -175,24 +175,6 @@ async def sendNewEmojiSet(guild):
     await minigameScreenChannel.send(emojiString)
     await minigameScreenChannel.send("Count the amount of " + emojiBeingUsed + " and to submit it, use the `p!countsubmit` followed by your count. First one to get it correct gets a point!")
     
-async def createLeaderboard(guild):
-    global scores
-    global roundNumber
-    localScores = scores
-    leaderboardString = "**Round " + str(roundNumber) + " Leaderboard**"
-    for num in range(4, -1, -1):
-        if num in scores.values():
-            for playerid, score in scores:
-                if score == num:
-                    player = guild.get_member(playerid)
-                    if player:
-                        localString = player.name + ": " + str(score)
-                        leaderboardString += localString
-                    else:
-                        localString = "n/a: " + str(score)
-                        leaderboardString += localString
-    return leaderboardString
-    
     
 @bot.command()
 async def ask(ctx):
@@ -404,10 +386,10 @@ async def countsubmit(ctx, number):
             if int(number) == amountOfEmoji:
                 couningEmojiPeriod = 0
                 await ctx.send(user.mention + " is correct!")
-                await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**.")  
-                leaderboardString = await createLeaderboard(ctx.message.guild)
+                scores[user.id] += 1
+                pointCount = scores[user.id]
+                await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**. They now have " + str(scoreCount) + " points.")  
                 amountOfEmoji = 0
-                await minigameScreenChannel.send(leaderboardString)
                 await minigameScreenChannel.send("Next round in 10 seconds.")
                 await asyncio.sleep(10)
                 await sendNewEmojiSet(ctx.message.guild)
