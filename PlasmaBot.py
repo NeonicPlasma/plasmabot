@@ -375,6 +375,7 @@ async def bpass(ctx, number):
         
 @bot.command()
 async def countsubmit(ctx, number):
+    minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
     user = ctx.message.author
     minigameScreenChannel = bot.get_channel(492771187332481034)
     global minigameParticipants
@@ -390,9 +391,22 @@ async def countsubmit(ctx, number):
                 pointCount = scores[user.id]
                 await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**. They now have " + str(pointCount) + " points.")  
                 amountOfEmoji = 0
-                await minigameScreenChannel.send("Next round in 10 seconds.")
-                await asyncio.sleep(10)
-                await sendNewEmojiSet(ctx.message.guild)
+                if pointCount < 5:
+                    await minigameScreenChannel.send("Next round in 10 seconds.")
+                    await asyncio.sleep(10)
+                    await sendNewEmojiSet(ctx.message.guild)
+                else:
+                    await minigameScreenChannel.send("**" + user.mention + " wins __Speed Counter!__** Congratulations! :trophy: **Minigame ends in 10 seconds.**")
+                    await asyncio.sleep(10)
+                    minigameParticipants = []
+                    eliminationOrder = []
+                    roundNumber = 0
+                    minigameRunning = 0
+                    minigamePlaying = 0
+                    currentHost = None
+                    for player in minigameRole.members:
+                        await player.remove_roles(minigameRole)
+                    
         else:
             await ctx.send("You are not participating in this minigame!")
                                                  
