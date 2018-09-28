@@ -165,7 +165,7 @@ async def sendNewEmojiSet(guild):
     minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
     for x in range(60):
         nextEmoji = random.choice(emojiSet)
-        if nextEmoji == emojiBeingUsed
+        if nextEmoji == emojiBeingUsed:
             amountOfEmoji += 1
         emojiString += nextEmoji
     await minigameScreenChannel.send("**Round " + str(roundNumber) + "**\n" + minigameRole.mention + ", the emoji you are counting this time is " + emojiBeingUsed + ". Emojis posted in 5 seconds...")
