@@ -407,7 +407,7 @@ async def plasmafight(ctx):
         await msg.edit('Plasma Fight!', embed=newembed)
         
 @bot.command()
-async def emojitest(ctx)
+async def emojitest(ctx):
     await ctx.send("<:BookYellow:495145295559000066>")
         
 bot.run(os.getenv('TOKEN'))
