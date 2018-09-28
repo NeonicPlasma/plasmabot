@@ -253,7 +253,7 @@ async def minigame(ctx, mode):
         if user == currentHost:
             if len(minigameParticipants) > 1:
                 if minigamePlaying == 0:
-                    listOfMinigameChoices = "**" + currentHost.mention + ", please choose a minigame type!** Use the `p!setminigame` command followed by the number corresponding to your minigame: 
+                    listOfMinigameChoices = "**" + currentHost.mention + ", please choose a minigame type!** Use the `p!setminigame` command followed by the number corresponding to your minigame: "
                     for minigameNum in minigameList:
                         localString = "\n**" + minigameNum + ":** " + minigameList[minigameNum]
                         listOfMinigameChoices += localString
