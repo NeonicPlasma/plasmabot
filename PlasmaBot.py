@@ -191,6 +191,7 @@ async def createLeaderboard(guild):
                     else:
                         localString = "n/a: " + str(score)
                         leaderboardString += localString
+    return leaderboardString
     
     
 @bot.command()
@@ -401,7 +402,13 @@ async def countsubmit(ctx, number):
     if countingEmojiPeriod:
         if user in minigameParticipants:
             if int(number) == amountOfEmoji:
-                minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**.")    
+                await ctx.send(user.mention + " is correct!")
+                await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**.")  
+                leaderboardString = createLeaderboard(ctx.message.guild)
+                await minigameScreenChannel.send(leaderboardString)
+                await minigameScreenChannel.send("Next round in 10 seconds.")
+                await asyncio.sleep(10)
+                await sendNewEmojiSet(ctx.message.guild)
         else:
             await ctx.send("You are not participating in this minigame!")
                                                  
