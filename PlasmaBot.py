@@ -253,7 +253,7 @@ async def minigame(ctx, mode):
         if user == currentHost:
             if len(minigameParticipants) > 1:
                 if minigamePlaying == 0:
-                    minigamePlaying = 1:
+                    minigamePlaying = 1
                     listOfMinigameChoices = "**" + currentHost.mention + ", please choose a minigame type!** Use the `p!setminigame` command followed by the number corresponding to your minigame: 
                     for minigameNum in minigameList:
                         localString = "\n**" + minigameNum + ":** " + minigameList[minigameNum]
@@ -292,6 +292,7 @@ async def setminigame(ctx, number)
     if choosingMinigame == 1:
         if currentHost == user:
             if number == "1":
+                choosingMinigame = 0
                 await ctx.send("**__Pass The Bomb__** has been initialized! Minigame starting in 10 seconds. " + minigameRole.mention + ", please head to " + minigameLoungeChannel.mention + ".")
                 await asyncio.sleep(10)
                 await startNewBombRound(guild)
