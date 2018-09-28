@@ -259,6 +259,7 @@ async def minigame(ctx, mode):
                         localString = "\n**" + minigameNum + ":** " + minigameList[minigameNum]
                         listOfMinigameChoices += localString
                     choosingMinigame = 1
+                    await ctx.send(listOfMinigameChoices)
                 else:
                     await ctx.send("A minigame is already being played!")
             else:
