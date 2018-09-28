@@ -35,12 +35,17 @@ async def on_member_remove(member):
     
 bot.remove_command('help')
 
+minigameList = {
+    "1": "Pass The Bomb"
+}
+
 # Minigame Related Variables:
 
 minigameParticipants = []
 eliminationOrder = []
 minigameRunning = 0
 minigamePlaying = 0
+choosingMinigame = 0
 
 currentHost = None
 
@@ -50,6 +55,10 @@ roundNumber = 0
 
 holdingBomb = None
 equationAnswer = 0
+
+# Speed Counter Related Variables:
+
+scores = {}
 
 async def cancelMinigame(guild):
     global holdingBomb
@@ -202,7 +211,7 @@ async def toggleminigames(ctx):
         await user.add_roles(role)
         
 @bot.command()
-async def bombminigame(ctx, mode):
+async def minigame(ctx, mode):
     user = ctx.message.author
     userid = user.id
     channel = ctx.message.channel
@@ -211,12 +220,13 @@ async def bombminigame(ctx, mode):
     global currentHost
     global minigameParticipants
     global minigamePlaying
-    global holdingBomb
     global roundNumber
+    global minigameList
+    global choosingMinigame
     minigameScreenChannel = bot.get_channel(492771187332481034)
     if mode == 'create':
         if minigameRunning == 0:
-            await ctx.send('**A game of __Pass The Bomb__ has been started!** \nPeople who would like to play can use the `p!bombminigame join` command to participate in the minigame!')
+            await ctx.send('**A minigame has been created!** \nPeople who would like to play can use the `p!minigame join` command to participate in the minigame!')
             minigameRunning = 1
             currentHost = user
         else:
@@ -226,15 +236,15 @@ async def bombminigame(ctx, mode):
             if minigamePlaying == 0:
                 if user in minigameParticipants:
                     minigameParticipants.remove(user)
-                    await ctx.send("**You have quit the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to rejoin, use the `p!bombminigame join` command to participate again.")
+                    await ctx.send("**You have quit the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to rejoin, use the `p!minigame join` command to participate again.")
                     await user.remove_roles(minigameRole)
                 else:
                     minigameParticipants.append(user)
                     await user.add_roles(minigameRole)
                     if len(minigameParticipants) > 1:
-                        await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. " + currentHost.mention + " can now use `p!bombminigame start` to start the minigame! If you would like to quit the minigame, use the `p!bombminigame join` command to quit.")
+                        await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. " + currentHost.mention + " can now use `p!minigame start` to start the minigame! If you would like to quit the minigame, use the `p!counterminigame join` command to quit.")
                     else:
-                        await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to quit the minigame, use the `p!bombminigame join` command to quit.") 
+                        await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to quit the minigame, use the `p!minigame join` command to quit.") 
             else:
                 await ctx.send("You cannot join or quit while a minigame is in progress!")
         else:
@@ -243,17 +253,12 @@ async def bombminigame(ctx, mode):
         if user == currentHost:
             if len(minigameParticipants) > 1:
                 if minigamePlaying == 0:
-                    minigamePlaying = 1
-                    await ctx.send("**Minigame has been initialized!** Game will start in 10 seconds.")
-                    await asyncio.sleep(10)
-                    startBomb = random.choice(minigameParticipants)
-                    roundNumber = 1
-                    await minigameScreenChannel.send("**Round 1**\n For this round, the bomb will start with " + startBomb.mention + ". Round starts in 5 seconds...")
-                    await asyncio.sleep(5)
-                    await minigameScreenChannel.send("**GO!**")
-                    holdingBomb = startBomb
-                    await sayBomb()
-                    await timer(ctx.message.guild)
+                    minigamePlaying = 1:
+                    listOfMinigameChoices = "**" + currentHost.mention + ", please choose a minigame type!** Use the `p!setminigame` command followed by the number corresponding to your minigame: 
+                    for minigameNum in minigameList:
+                        localString = "\n**" + minigameNum + ":** " + minigameList[minigameNum]
+                        listOfMinigameChoices += localString
+                    choosingMinigame = 1
                 else:
                     await ctx.send("A minigame is already being played!")
             else:
@@ -272,10 +277,29 @@ async def bombminigame(ctx, mode):
             else:
                 await ctx.send("You are not the host!")
         else:
-            await ctx.send("There is no minigame going on right now! To start one, use `p!bombminigame create`.")
+            await ctx.send("There is no minigame going on right now! To start one, use `p!minigame create`.")
     else:
         await ctx.send('Invalid mode!')
-
+        
+@bot.command()
+async def setminigame(ctx, number)
+    global choosingMinigame
+    global currentHost
+    user = ctx.message.author
+    guild = ctx.message.guild
+    minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
+    minigameLoungeChannel = bot.get_channel(492771206500712448)
+    if choosingMinigame == 1:
+        if currentHost == user:
+            if number == "1":
+                await ctx.send("**__Pass The Bomb__** has been initialized! Minigame starting in 10 seconds. " + minigameRole.mention + ", please head to " + minigameLoungeChannel.mention + ".")
+                await asyncio.sleep(10)
+                await startNewBombRound(guild)
+            else:
+                await ctx.send("Invalid minigame! Please try again.")
+        else:
+            await ctx.send("You cannot use this command!")
+                
 @bot.command()
 async def bpass(ctx, number):
     global minigameRunning
