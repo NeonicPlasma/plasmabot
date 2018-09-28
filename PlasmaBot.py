@@ -282,7 +282,7 @@ async def minigame(ctx, mode):
         await ctx.send('Invalid mode!')
         
 @bot.command()
-async def setminigame(ctx, number)
+async def setminigame(ctx, number):
     global choosingMinigame
     global currentHost
     user = ctx.message.author
