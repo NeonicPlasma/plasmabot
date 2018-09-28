@@ -175,15 +175,23 @@ async def sendNewEmojiSet(guild):
     await minigameScreenChannel.send(emojiString)
     await minigameScreenChannel.send("Count the amount of " + emojiBeingUsed + " and to submit it, use the `p!countsubmit` followed by your count. First one to get it correct gets a point!")
     
-async def createLeaderboard():
+async def createLeaderboard(guild):
     global scores
     global roundNumber
     localScores = scores
     leaderboardString = "**Round " + str(roundNumber) + " Leaderboard**"
     for num in range(4, -1, -1):
         if num in scores.values():
-            for player in scores:
-                
+            for playerid, score in scores:
+                if score == num:
+                    player = guild.get_member(playerid)
+                    if player:
+                        localString = player.name + ": " + str(score)
+                        leaderboardString += localString
+                    else:
+                        localString = "n/a: " + str(score)
+                        leaderboardString += localString
+    
     
 @bot.command()
 async def ask(ctx):
