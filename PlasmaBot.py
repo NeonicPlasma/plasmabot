@@ -345,7 +345,7 @@ async def setminigame(ctx, number):
                 await ctx.send("**__Pass The Bomb__** has been initialized! Minigame starting in 10 seconds. " + minigameRole.mention + ", please head to " + minigameLoungeChannel.mention + ".")
                 await asyncio.sleep(10)
                 await startNewBombRound(guild)
-            elif number == "2"
+            elif number == "2":
                 choosingMinigame = 0
                 global scores
                 for player in minigameParticipants:
