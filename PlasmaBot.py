@@ -399,12 +399,14 @@ async def countsubmit(ctx, number):
     global amountOfEmoji
     global countingEmojiPeriod
     global scores
-    if countingEmojiPeriod:
+    if countingEmojiPeriod == 1:
         if user in minigameParticipants:
             if int(number) == amountOfEmoji:
+                couningEmojiPeriod = 0
                 await ctx.send(user.mention + " is correct!")
                 await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**.")  
-                leaderboardString = createLeaderboard(ctx.message.guild)
+                leaderboardString = await createLeaderboard(ctx.message.guild)
+                amountOfEmoji = 0
                 await minigameScreenChannel.send(leaderboardString)
                 await minigameScreenChannel.send("Next round in 10 seconds.")
                 await asyncio.sleep(10)
