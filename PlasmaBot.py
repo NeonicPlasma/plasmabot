@@ -59,6 +59,8 @@ equationAnswer = 0
 # Speed Counter Related Variables:
 
 scores = {}
+amountOfEmoji = 0
+countingEmojiPeriod = 0
 
 async def cancelMinigame(guild):
     global holdingBomb
@@ -75,6 +77,8 @@ async def cancelMinigame(guild):
     minigameRunning = 0
     currentHost = None
 
+# Bomb Minigame Functions
+    
 async def startNewBombRound(guild):
     minigameScreenChannel = bot.get_channel(492771187332481034)
     global roundNumber
@@ -97,7 +101,6 @@ async def sayBomb():
     equation2 = random.randint(1, 50)
     equationAnswer = equation1 + equation2
     await minigameLoungeChannel.send(holdingBomb.mention + ", to pass the bomb to someone, use the `p!bpass` command followed by the answer to **" + str(equation1) + " + " + str(equation2) + "**, followed by a mention of the player you want to pass it to.")
-    
     
 async def timer(guild):
     global holdingBomb
@@ -145,6 +148,42 @@ async def timer(guild):
         await minigameScreenChannel.send("**" + str(len(minigameParticipants)) + "** contestants remain! Next round starting in 15 seconds!")
         await asyncio.sleep(15)
         await startNewBombRound(guild)
+        
+# Counter Minigame Functions
+
+async def sendNewEmojiSet(guild):
+    global amountOfEmoji
+    global scores
+    global roundNumber
+    global countingEmojiPeriod
+    roundNumber += 1
+    emojiSet = ["<:BookGreen:495145390560116736>", "<:BookYellow:495145295559000066>", "<:BookBlue:495145294988574720>", "<:BookRed:495145295747743754>"]
+    emojiBeingUsed = random.choice(emojiSet)
+    emojiString = ""
+    minigameScreenChannel = bot.get_channel(492771187332481034)
+    minigameLoungeChannel = bot.get_channel(492771206500712448)
+    minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
+    for x in range(60):
+        nextEmoji = random.choice(emojiSet)
+        if nextEmoji == emojiBeingUsed
+            amountOfEmoji += 1
+        emojiString += nextEmoji
+    await minigameScreenChannel.send("**Round " + str(roundNumber) + "**\n" + minigameRole.mention + ", the emoji you are counting this time is " + emojiBeingUsed + ". Emojis posted in 5 seconds...")
+    await asyncio.sleep(5)
+    countingEmojiPeriod = 1
+    await minigameScreenChannel.send("**GO!**")
+    await minigameScreenChannel.send(emojiString)
+    await minigameScreenChannel.send("Count the amount of " + emojiBeingUsed + " and to submit it, use the `p!countsubmit` followed by your count. First one to get it correct gets a point!")
+    
+async def createLeaderboard():
+    global scores
+    global roundNumber
+    localScores = scores
+    leaderboardString = "**Round " + str(roundNumber) + " Leaderboard**"
+    for num in range(4, -1, -1):
+        if num in scores.values():
+            for player in scores:
+                
     
 @bot.command()
 async def ask(ctx):
@@ -253,6 +292,7 @@ async def minigame(ctx, mode):
         if user == currentHost:
             if len(minigameParticipants) > 1:
                 if minigamePlaying == 0:
+                    minigamePlaying = 1
                     listOfMinigameChoices = "**" + currentHost.mention + ", please choose a minigame type!** Use the `p!setminigame` command followed by the number corresponding to your minigame: "
                     for minigameNum in minigameList:
                         localString = "\n**" + minigameNum + ":** " + minigameList[minigameNum]
@@ -285,6 +325,7 @@ async def minigame(ctx, mode):
 async def setminigame(ctx, number):
     global choosingMinigame
     global currentHost
+    global minigameParticipants
     user = ctx.message.author
     guild = ctx.message.guild
     minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
@@ -296,6 +337,14 @@ async def setminigame(ctx, number):
                 await ctx.send("**__Pass The Bomb__** has been initialized! Minigame starting in 10 seconds. " + minigameRole.mention + ", please head to " + minigameLoungeChannel.mention + ".")
                 await asyncio.sleep(10)
                 await startNewBombRound(guild)
+            elif number == "2"
+                choosingMinigame = 0
+                global scores
+                for player in minigameParticipants:
+                    scores[player.id] = 0
+                await ctx.send("**__Speed Counter__** has been initialized! Minigame starting in 10 seconds. " + minigameRole.mention + ", please head to " + minigameLoungeChannel.mention + ".")
+                await asyncio.sleep(10)
+                await sendNewEmojiSet(guild)
             else:
                 await ctx.send("Invalid minigame! Please try again.")
         else:
@@ -332,6 +381,22 @@ async def bpass(ctx, number):
             await ctx.send("You need to mention the person you are passing it to in your command!")
     else:
         await ctx.send("You aren't holding the bomb!")
+        
+@bot.command()
+async def countsubmit(ctx, number):
+    user = ctx.message.author
+    minigameScreenChannel = bot.get_channel(492771187332481034)
+    global minigameParticipants
+    global amountOfEmoji
+    global countingEmojiPeriod
+    global scores
+    if countingEmojiPeriod:
+        if user in minigameParticipants:
+            if int(number) == amountOfEmoji:
+                minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**."
+                
+        else:
+            await ctx.send("You are not participating in this minigame!")
                                                  
 @bot.command()
 async def botsend(ctx, message):
