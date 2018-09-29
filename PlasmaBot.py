@@ -375,7 +375,7 @@ async def bpass(ctx, number):
         
 @bot.command()
 async def countsubmit(ctx, number):
-    minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
+    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
     user = ctx.message.author
     minigameScreenChannel = bot.get_channel(492771187332481034)
     global minigameParticipants
