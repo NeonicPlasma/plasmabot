@@ -501,7 +501,7 @@ async def dictionarytest(ctx):
     for number in range(6, -1, -1):
         if number in dictionary.values():
             peopleWithPointCount = 0
-            for key, value in dictionary.items:
+            for key, value in dictionary.items():
                 if value == number:
                     user = ctx.message.guild.get_member(key)
                     if user:
