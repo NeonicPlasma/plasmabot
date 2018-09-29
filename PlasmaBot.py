@@ -177,11 +177,6 @@ async def sendNewEmojiSet(guild):
     await minigameScreenChannel.send(emojiString)
     await minigameScreenChannel.send("Count the amount of " + emojiBeingUsed + " and to submit it, use the `p!countsubmit` followed by your count. First one to get it correct gets a point!")
     
-async def createLogMessage()
-    global minigameParticipants
-    global scores
-    global 
-    
 @bot.command()
 async def ask(ctx):
     possibleresponses = [
@@ -497,5 +492,23 @@ async def plasmafight(ctx):
 @bot.command()
 async def emojitest(ctx):
     await ctx.send("<:BookYellow:495145295559000066>")
+    
+@bot.command()
+async def dictionarytest(ctx):
+    placing = 1
+    logString = ""
+    dictionary = {"NeonicPlasma": 5, "tr_;": 0, "MistyMoonlight": 3, "Achoo": 6, "SuperHyperGuy": 2}
+    for number in range(6, -1, -1):
+        if number in dictionary.values()
+            peopleWithPointCount = 0
+            for key, value in dictionary:
+                if value == number:
+                    user = ctx.message.guild.get_member(key)
+                    if user:
+                        peopleWithPointCount += 1
+                        localString = str(placing) + ": " + user.name
+                        logString += localString
+                placing += peopleWithPointCount
+    await ctx.send(logString)
         
 bot.run(os.getenv('TOKEN'))
