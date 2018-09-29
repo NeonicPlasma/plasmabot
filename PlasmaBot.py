@@ -177,6 +177,10 @@ async def sendNewEmojiSet(guild):
     await minigameScreenChannel.send(emojiString)
     await minigameScreenChannel.send("Count the amount of " + emojiBeingUsed + " and to submit it, use the `p!countsubmit` followed by your count. First one to get it correct gets a point!")
     
+async def createLogMessage()
+    global minigameParticipants
+    global scores
+    global 
     
 @bot.command()
 async def ask(ctx):
@@ -274,13 +278,13 @@ async def minigame(ctx, mode):
                     minigameParticipants.append(user)
                     await user.add_roles(minigameRole)
                     if len(minigameParticipants) > 1:
-                        await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. " + currentHost.mention + " can now use `p!minigame start` to start the minigame! If you would like to quit the minigame, use the `p!counterminigame join` command to quit.")
+                        await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. " + currentHost.mention + " can now use `p!minigame start` to start the minigame! If you would like to quit the minigame, use the `p!minigame join` command to quit.")
                     else:
                         await ctx.send("**You have joined the minigame!** The contestant count is now **" + str(len(minigameParticipants)) + "**. If you would like to quit the minigame, use the `p!minigame join` command to quit.") 
             else:
                 await ctx.send("You cannot join or quit while a minigame is in progress!")
         else:
-            await ctx.send("**A minigame is not running!** To create one, use the command `p!bombminigame create`.")
+            await ctx.send("**A minigame is not running!** To create one, use the command `p!minigame create`.")
     elif mode == 'start':
         if user == currentHost:
             if len(minigameParticipants) > 1:
