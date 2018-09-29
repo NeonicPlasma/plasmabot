@@ -509,7 +509,7 @@ async def dictionarytest(ctx):
                         peopleWithPointCount += 1
                         localString = str(placing) + ": " + user.name
                         logString += localString
-                placing += peopleWithPointCount
+            placing += peopleWithPointCount
     await ctx.send(logString)
         
 bot.run(os.getenv('TOKEN'))
