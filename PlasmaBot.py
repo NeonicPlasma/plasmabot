@@ -495,6 +495,7 @@ async def emojitest(ctx):
     
 @bot.command()
 async def dictionarytest(ctx):
+    global minigameParticipants
     placing = 1
     logString = ""
     dictionary = {"331882846442487810": 5, "454906800798695424": 0, "265737887805472768": 3, "202051164991127552": 6, "186541708014649344": 2}
