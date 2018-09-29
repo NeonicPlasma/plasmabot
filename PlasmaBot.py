@@ -510,6 +510,7 @@ async def dictionarytest(ctx):
                         peopleWithPointCount += 1
                         localString = "\n#" + str(placing) + ": " + user.name
                         logString += localString
+                        del dictionary[key]
             placing += peopleWithPointCount
     await ctx.send(logString)
         
