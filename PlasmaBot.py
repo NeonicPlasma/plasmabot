@@ -502,8 +502,8 @@ async def dictionarytest(ctx):
         if number in dictionary.values():
             peopleWithPointCount = 0
             for key, value in dictionary.items():
-                await ctx.send(str(key))
                 if value == number:
+                    await ctx.send(str(key))
                     user = ctx.message.guild.get_member(key)
                     if user:
                         peopleWithPointCount += 1
