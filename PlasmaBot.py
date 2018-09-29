@@ -497,7 +497,7 @@ async def emojitest(ctx):
 async def dictionarytest(ctx):
     placing = 1
     logString = ""
-    dictionary = {"NeonicPlasma": 5, "tr_;": 0, "MistyMoonlight": 3, "Achoo": 6, "SuperHyperGuy": 2}
+    dictionary = {"331882846442487810": 5, "454906800798695424": 0, "265737887805472768": 3, "202051164991127552": 6, "186541708014649344": 2}
     for number in range(6, -1, -1):
         if number in dictionary.values():
             peopleWithPointCount = 0
