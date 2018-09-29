@@ -115,13 +115,15 @@ async def timer(guild):
     await asyncio.sleep(1)
     amountOfTime = random.randint(70, 100)
     await asyncio.sleep(amountOfTime)
+    personEliminated = holdingBomb
+    holdingBomb = None
     minigameScreenChannel = bot.get_channel(492771187332481034)
     minigameHistoryChannel = bot.get_channel(494751892874854421)
     await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + holdingBomb.mention + " had the bomb last, so they are eliminated!")
-    minigameParticipants.remove(holdingBomb)
-    await holdingBomb.remove_roles(minigameRole)
-    await holdingBomb.add_roles(eliminatedRole)
-    eliminationOrder = [holdingBomb] + eliminationOrder
+    minigameParticipants.remove(personEliminated)
+    await personEliminated.remove_roles(minigameRole)
+    await personEliminated.add_roles(eliminatedRole)
+    eliminationOrder = [personEliminated] + eliminationOrder
     holdingBomb = None
     if len(minigameParticipants) == 1:
         winner = minigameParticipants[0]
