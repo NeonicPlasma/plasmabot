@@ -382,6 +382,11 @@ async def countsubmit(ctx, number):
     global amountOfEmoji
     global countingEmojiPeriod
     global scores
+    global minigameRunning
+    global minigamePlaying
+    global roundNumber
+    global currentHost
+    global eliminationOrder
     if countingEmojiPeriod == 1:
         if user in minigameParticipants:
             if int(number) == amountOfEmoji:
