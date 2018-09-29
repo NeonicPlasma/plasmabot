@@ -504,13 +504,15 @@ async def dictionarytest(ctx):
             peopleWithPointCount = 0
             for key, value in dictionary.items():
                 if value == number:
-                    await ctx.send(str(key))
                     user = ctx.message.guild.get_member(int(key))
                     if user:
                         peopleWithPointCount += 1
                         localString = "\n#" + str(placing) + ": " + user.name
                         logString += localString
-                        del dictionary[key]
+                        try:
+                            del dictionary[key]
+                        except KeyError:
+                            await ctx.send("Key error: " + user.name + "!")
             placing += peopleWithPointCount
     await ctx.send(logString)
         
