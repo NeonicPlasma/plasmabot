@@ -499,7 +499,7 @@ async def dictionarytest(ctx):
     logString = ""
     dictionary = {"NeonicPlasma": 5, "tr_;": 0, "MistyMoonlight": 3, "Achoo": 6, "SuperHyperGuy": 2}
     for number in range(6, -1, -1):
-        if number in dictionary.values()
+        if number in dictionary.values():
             peopleWithPointCount = 0
             for key, value in dictionary:
                 if value == number:
