@@ -502,7 +502,7 @@ async def dictionarytest(ctx):
         if number in dictionary.values():
             peopleWithPointCount = 0
             for key, value in dictionary.items():
-                await ctx.send(str(value))
+                await ctx.send(str(key))
                 if value == number:
                     user = ctx.message.guild.get_member(key)
                     if user:
