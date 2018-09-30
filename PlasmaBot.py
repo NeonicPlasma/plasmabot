@@ -246,7 +246,8 @@ async def minigame(ctx, mode):
     user = ctx.message.author
     userid = user.id
     channel = ctx.message.channel
-    minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
+    if ctx.message.guild:
+        minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
     global minigameRunning
     global currentHost
     global minigameParticipants
