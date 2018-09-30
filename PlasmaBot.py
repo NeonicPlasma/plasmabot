@@ -416,10 +416,11 @@ async def countsubmit(ctx, number):
                         await player.remove_roles(minigameRole)
                     logString = "**Congratulations to " + user.mention + " for winning __Speed Counter!__ \n#1: " + user.mention + "**"
                     placing = 2
+                    peopleWithPointCount = 0
                     for number in range(3, -1, -1):
                         await ctx.send(number)
+                        global peopleWithPointCount
                         if number in scores.values():
-                            peopleWithPointCount = 0
                             for key, value in dictionary.items():
                                 if value == number:
                                     user = ctx.message.guild.get_member(int(key))
