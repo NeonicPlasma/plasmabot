@@ -419,7 +419,6 @@ async def countsubmit(ctx, number):
                     peopleWithPointCount = 0
                     for number in range(3, -1, -1):
                         await ctx.send(number)
-                        global peopleWithPointCount
                         if number in scores.values():
                             for key, value in dictionary.items():
                                 if value == number:
