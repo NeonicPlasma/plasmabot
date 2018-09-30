@@ -399,7 +399,7 @@ async def countsubmit(ctx, number):
                 pointCount = scores[user.id]
                 await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**. They now have " + str(pointCount) + " points.")  
                 amountOfEmoji = 0
-                if pointCount < 5:
+                if pointCount < 3:
                     await minigameScreenChannel.send("Next round in 10 seconds.")
                     await asyncio.sleep(10)
                     await sendNewEmojiSet(ctx.message.guild)
@@ -417,7 +417,7 @@ async def countsubmit(ctx, number):
                     logString = "**Congratulations to " + user.mention + " for winning __Speed Counter!__ \n#1: " + user.mention + "**"
                     placing = 2
                     peopleWithPointCount = 0
-                    for number in range(3, -1, -1):
+                    for number in range(2, -1, -1):
                         await ctx.send(number)
                         if number in scores.values():
                             for key, value in dictionary.items():
