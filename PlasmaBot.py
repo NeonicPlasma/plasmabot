@@ -300,14 +300,14 @@ async def minigame(ctx, mode):
     elif mode == 'cancel':
         if minigameRunning == 1:
             if currentHost == user:
-                if isinstance(ctx.message.channel, discord.DMChannel):
+                if isinstance(ctx.message.channel, discord.TextChannel):
                     if minigamePlaying == 0:
                         await ctx.send("Minigame has been cancelled.")
                         await cancelminigame(ctx.message.guild)
                     else:
                         await ctx.send("You cannot cancel the minigame if it has already started!")
                 else:
-                    await ctx.send("You can only use this in DMs.")
+                    await ctx.send("You cannot use this in DMs.")
             else:
                 await ctx.send("You are not the host!")
         else:
