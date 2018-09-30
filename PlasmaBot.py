@@ -400,7 +400,7 @@ async def answer(ctx, number):
                 pointCount = scores[user.id]
                 await minigameScreenChannel.send("**" + user.mention + " got it correct!** The answer was **" + str(amountOfEmoji) + "**. They now have " + str(pointCount) + " points.")  
                 amountOfEmoji = 0
-                if pointCount < 3:
+                if pointCount < 5:
                     await minigameScreenChannel.send("Next round in 10 seconds.")
                     await asyncio.sleep(10)
                     await sendNewEmojiSet(ctx.message.guild)
@@ -415,10 +415,10 @@ async def answer(ctx, number):
                     currentHost = None
                     for player in minigameRole.members:
                         await player.remove_roles(minigameRole)
-                    logString = "**Congratulations to " + user.mention + " for winning __Speed Counter!__ \n#1: " + user.mention + "**"
+                    logString = "**Congratulations to " + user.mention + " for winning __Speed Counter!__ \n#1: " + user.mention + " (5)**"
                     placing = 2
                     peopleWithPointCount = 0
-                    for number in range(2, -1, -1):
+                    for number in range(4, -1, -1):
                         await ctx.send(number)
                         if number in scores.values():
                             for key, value in scores.items():
@@ -427,9 +427,9 @@ async def answer(ctx, number):
                                     localString = ""
                                     peopleWithPointCount += 1
                                     if user:
-                                        localString = "\n#" + str(placing) + ": " + user.name
+                                        localString = "\n#" + str(placing) + ": " + user.name + "(" + str(number) + ")"
                                     else:
-                                        localString = "\n#" + str(placing) + ": Cannot Find User"
+                                        localString = "\n#" + str(placing) + ": Cannot Find User" + "(" + str(number) + ")"
                                     logString += localString
                         placing += peopleWithPointCount
                     await minigameLogChannel.send(logString)
