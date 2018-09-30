@@ -175,7 +175,7 @@ async def sendNewEmojiSet(guild):
     countingEmojiPeriod = 1
     await minigameScreenChannel.send("**GO!**")
     await minigameScreenChannel.send(emojiString)
-    await minigameScreenChannel.send("Count the amount of " + emojiBeingUsed + " and to submit it, use the `p!countsubmit` followed by your count. First one to get it correct gets a point!")
+    await minigameScreenChannel.send("Count the amount of " + emojiBeingUsed + " and to submit it, use the `p!answer` command followed by your count. First one to get it correct gets a point!")
     
 @bot.command()
 async def ask(ctx):
@@ -377,7 +377,7 @@ async def bpass(ctx, number):
         await ctx.send("You aren't holding the bomb!")
         
 @bot.command()
-async def countsubmit(ctx, number):
+async def answer(ctx, number):
     minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
     user = ctx.message.author
     minigameScreenChannel = bot.get_channel(492771187332481034)
@@ -421,7 +421,7 @@ async def countsubmit(ctx, number):
                     for number in range(2, -1, -1):
                         await ctx.send(number)
                         if number in scores.values():
-                            for key, value in dictionary.items():
+                            for key, value in scores.items():
                                 if value == number:
                                     user = ctx.message.guild.get_member(int(key))
                                     localString = ""
