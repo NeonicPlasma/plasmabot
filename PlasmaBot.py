@@ -9,7 +9,7 @@ import time
 command_prefix='p!'
 bot = commands.Bot(command_prefix)
 
-game = discord.Game("killing Neonic")
+game = discord.Game("fighting Neonic")
 
 @bot.event
 async def on_ready():
