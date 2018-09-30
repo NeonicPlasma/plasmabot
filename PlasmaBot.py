@@ -118,7 +118,7 @@ async def timer(guild):
     personEliminated = holdingBomb
     holdingBomb = None
     minigameScreenChannel = bot.get_channel(492771187332481034)
-    minigameHistoryChannel = bot.get_channel(494751892874854421)
+    minigameLogChannel = bot.get_channel(494751892874854421)
     await minigameScreenChannel.send(":bomb: **The bomb exploded!** :bomb: \n" + personEliminated.mention + " had the bomb last, so they are eliminated!")
     minigameParticipants.remove(personEliminated)
     await personEliminated.remove_roles(minigameRole)
@@ -133,10 +133,10 @@ async def timer(guild):
             await player.remove_roles(minigameRole)
         for player in eliminatedRole.members:
             await player.remove_roles(eliminatedRole)
-        logMessage = "**Congratulations to " + winner.mention + " for winning __Pass The Bomb!__\n1: " + winner.mention + "**"
+        logMessage = "**Congratulations to " + winner.mention + " for winning __Pass The Bomb!__\n#1: " + winner.mention + "**"
         placing = 2
         for player in eliminationOrder:
-            localMessage = "\n" + str(placing) + ": " + player.mention
+            localMessage = "\n#" + str(placing) + ": " + player.mention
             logMessage += localMessage
             placing += 1
         await minigameHistoryChannel.send(logMessage)
@@ -255,6 +255,7 @@ async def minigame(ctx, mode):
     global minigameList
     global choosingMinigame
     minigameScreenChannel = bot.get_channel(492771187332481034)
+    minigameLogChannel = bot.get_channel(494751892874854421)
     if mode == 'create':
         if minigameRunning == 0:
             await ctx.send('**A minigame has been created!** \nPeople who would like to play can use the `p!minigame join` command to participate in the minigame!')
@@ -412,7 +413,24 @@ async def countsubmit(ctx, number):
                     currentHost = None
                     for player in minigameRole.members:
                         await player.remove_roles(minigameRole)
-                    
+                    logString = "**Congratulations to " + user.mention + " for winning __Speed Counter!__ \n#1: " + user.mention + "**"
+                    placing = 2
+                    for number in range(3, -1, -1):
+                        await ctx.send(number)
+                        if number in scores.values():
+                            peopleWithPointCount = 0
+                            for key, value in dictionary.items():
+                                if value == number:
+                                    user = ctx.message.guild.get_member(int(key))
+                                    localString = ""
+                                    peopleWithPointCount += 1
+                                    if user:
+                                        localString = "\n#" + str(placing) + ": " + user.name
+                                    else:
+                                        localString = "\n#" + str(placing) + ": Cannot Find User"
+                                    logString += localString
+                        placing += peopleWithPointCount
+                    await minigameLogChannel.send(logString)
         else:
             await ctx.send("You are not participating in this minigame!")
                                                  
