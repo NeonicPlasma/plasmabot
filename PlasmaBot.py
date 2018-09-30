@@ -62,7 +62,7 @@ scores = {}
 amountOfEmoji = 0
 countingEmojiPeriod = 0
 
-async def cancelMinigame(guild):
+async def cancelminigame(guild):
     global holdingBomb
     global eliminationOrder
     global minigameParticipants
