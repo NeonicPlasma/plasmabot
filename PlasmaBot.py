@@ -139,7 +139,7 @@ async def timer(guild):
             localMessage = "\n#" + str(placing) + ": " + player.mention
             logMessage += localMessage
             placing += 1
-        await minigameHistoryChannel.send(logMessage)
+        await minigameLogChannel.send(logMessage)
         minigameParticipants = []
         eliminationOrder = []
         roundNumber = 0
@@ -380,6 +380,7 @@ async def countsubmit(ctx, number):
     minigameRole = discord.utils.get(ctx.message.guild.roles, name='Minigame Participants')
     user = ctx.message.author
     minigameScreenChannel = bot.get_channel(492771187332481034)
+    minigameLogChannel = bot.get_channel(494751892874854421)
     global minigameParticipants
     global amountOfEmoji
     global countingEmojiPeriod
