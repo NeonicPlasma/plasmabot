@@ -37,6 +37,7 @@ bot.remove_command('help')
 
 minigameList = {
     "1": "Pass The Bomb"
+    "2": "Speed Counter"
 }
 
 # Minigame Related Variables:
@@ -419,7 +420,6 @@ async def answer(ctx, number):
                     placing = 2
                     peopleWithPointCount = 0
                     for number in range(4, -1, -1):
-                        await ctx.send(number)
                         if number in scores.values():
                             for key, value in scores.items():
                                 if value == number:
@@ -427,9 +427,9 @@ async def answer(ctx, number):
                                     localString = ""
                                     peopleWithPointCount += 1
                                     if user:
-                                        localString = "\n#" + str(placing) + ": " + user.name + "(" + str(number) + ")"
+                                        localString = "\n#" + str(placing) + ": " + user.mention + " (" + str(number) + ")"
                                     else:
-                                        localString = "\n#" + str(placing) + ": Cannot Find User" + "(" + str(number) + ")"
+                                        localString = "\n#" + str(placing) + ": Cannot Find User" + " (" + str(number) + ")"
                                     logString += localString
                         placing += peopleWithPointCount
                     await minigameLogChannel.send(logString)
