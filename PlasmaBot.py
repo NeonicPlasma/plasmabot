@@ -36,7 +36,7 @@ async def on_member_remove(member):
 bot.remove_command('help')
 
 minigameList = {
-    "1": "Pass The Bomb"
+    "1": "Pass The Bomb",
     "2": "Speed Counter"
 }
 
