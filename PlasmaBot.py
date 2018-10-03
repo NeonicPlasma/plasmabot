@@ -340,6 +340,10 @@ async def setminigame(ctx, number):
                 await ctx.send("**__Speed Counter__** has been initialized! Minigame starting in 10 seconds. " + minigameRole.mention + ", please head to " + minigameLoungeChannel.mention + ".")
                 await asyncio.sleep(10)
                 await sendNewEmojiSet(guild)
+            elif number == "3":
+                choosingMinigame = 0
+                await ctx.send("**__Rise To The Limit__** has been initialized! Minigame starting in 10 seconds. " + minigameRole.mention + ", please head to " + minigameLoungeChannel.mention + ".")
+                await asyncio.sleep(10)
             else:
                 await ctx.send("Invalid minigame! Please try again.")
         else:
