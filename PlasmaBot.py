@@ -11,7 +11,7 @@ bot = commands.Bot(command_prefix)
 
 game = discord.Game("fighting Neonic")
 
-@bot.event()
+@bot.event
 async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=game)
     print('Logged in as')
@@ -19,7 +19,7 @@ async def on_ready():
     print(bot.user.id)
     print('------')
     
-@bot.event()
+@bot.event
 async def on_member_join(member):
     welcome = bot.get_channel(492571950422556672)
     guidelines = bot.get_channel(492571898010664970)
@@ -30,7 +30,7 @@ async def on_member_join(member):
     await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good experience here, and make sure to read " + welcome.mention + " and " + guidelines.mention + "!")
     minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
 
-@bot.event()
+@bot.event
 async def on_member_remove(member):
     channel = bot.get_channel(492577748003586048)    
     await channel.send("Aww, sorry that you had to go, **" + member.name + "**#" + member.discriminator + "! I hope you come back soon!")
