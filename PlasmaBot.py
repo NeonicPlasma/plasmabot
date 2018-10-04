@@ -11,7 +11,7 @@ bot = commands.Bot(command_prefix)
 
 game = discord.Game("fighting Neonic")
 
-@bot.event
+@bot.event()
 async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=game)
     print('Logged in as')
@@ -19,17 +19,20 @@ async def on_ready():
     print(bot.user.id)
     print('------')
     
-
-@bot.event
+@bot.event()
 async def on_member_join(member):
     welcome = bot.get_channel(492571950422556672)
     guidelines = bot.get_channel(492571898010664970)
     channel = bot.get_channel(492577748003586048)
+    guild = channel.guild
+    botUser = guild.get_member(492582158104526861)
+    raidProtectionRole = discord.utils.get(guild.roles, name='Raid Protection On')
     await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good experience here, and make sure to read " + welcome.mention + " and " + guidelines.mention + "!")
+    minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
 
-@bot.event
+@bot.event()
 async def on_member_remove(member):
-    channel = bot.get_channel(492577748003586048)
+    channel = bot.get_channel(492577748003586048)    
     await channel.send("Aww, sorry that you had to go, **" + member.name + "**#" + member.discriminator + "! I hope you come back soon!")
    
     
@@ -448,6 +451,17 @@ async def botsend(ctx, message):
     if staffRole in authorRoles:
         channel = ctx.message.channel_mentions[0]
         await channel.send(message)
+    else:
+        await ctx.send('**You have no permission to use this command!**')
+        
+@bot.command()
+async def toggleraidprotection(ctx):
+    author = ctx.message.author
+    authorRoles = author.roles
+    staffRole = discord.utils.get(ctx.message.guild.roles, name="Staff")
+    if staffRole in authorRoles:
+        guild = ctx.message.guild
+        
     else:
         await ctx.send('**You have no permission to use this command!**')
         
