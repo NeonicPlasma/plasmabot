@@ -27,8 +27,12 @@ async def on_member_join(member):
     guild = channel.guild
     botUser = guild.get_member(492582158104526861)
     raidProtectionRole = discord.utils.get(guild.roles, name='Raid Protection On')
-    await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good experience here, and make sure to read " + welcome.mention + " and " + guidelines.mention + "!")
-    minigameRole = discord.utils.get(guild.roles, name='Minigame Participants')
+    memberRole = discord.utils.get(guild.roles, name='Member')
+    if raidProtectionRole in botUser.roles:
+        await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good experience here, and make sure to read " + welcome.mention + " and " + guidelines.mention + "! **Raid protection is on, so the staff will give you the member role, so please stay and be patient!**")
+    else:
+        await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good experience here, and make sure to read " + welcome.mention + " and " + guidelines.mention + "!")
+        member.add_roles(memberRole)
 
 @bot.event
 async def on_member_remove(member):
