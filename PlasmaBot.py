@@ -32,7 +32,7 @@ async def on_member_join(member):
         await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good experience here, and make sure to read " + welcome.mention + " and " + guidelines.mention + "! **Raid protection is on, so the staff will give you the member role, so please stay and be patient!**")
     else:
         await channel.send("Welcome to Plasma's Realm, " + member.mention + "! We hope you have a good experience here, and make sure to read " + welcome.mention + " and " + guidelines.mention + "!")
-        member.add_roles(memberRole)
+        await member.add_roles(memberRole)
 
 @bot.event
 async def on_member_remove(member):
@@ -459,13 +459,27 @@ async def botsend(ctx, message):
         await ctx.send('**You have no permission to use this command!**')
         
 @bot.command()
-async def toggleraidprotection(ctx):
+async def moderate(ctx, mode):
     author = ctx.message.author
     authorRoles = author.roles
     staffRole = discord.utils.get(ctx.message.guild.roles, name="Staff")
     if staffRole in authorRoles:
         guild = ctx.message.guild
-        
+        if mode == "toggleraidprotection":
+            raidProtectionRole = discord.utils.get(ctx.message.guild.roles, name="Raid Protection On")
+            botUser = guild.get_member(492582158104526861)
+            if raidProtectionRole in botUser.roles:
+                await ctx.send("Raid protection has been turned off.")
+                await botUser.remove_roles(raidProtectionRole)
+            else:
+                await ctx.send("Raid protection has been turned on.")
+                await botUser.add_roles(raidProtectionRole)
+        elif mode == "warn":
+            wOne = discord.utils.get(ctx.message.guild.roles, name="wOne")
+            wTwo = discord.utils.get(ctx.message.guild.roles, name="wTwo")
+            wThree = discord.utils.get(ctx.message.guild.roles, name="wThree")
+            wFour = discord.utils.get(ctx.message.guild.roles, name="wFour")
+            wFive = discord.utils.get(ctx.message.guild.roles, name="wFive")
     else:
         await ctx.send('**You have no permission to use this command!**')
         
@@ -530,30 +544,5 @@ async def plasmafight(ctx):
             newembed.add_field(name = 'Player2', value = str(player2hp) + '/150')
         await ctx.send(line + "\n" + "hello") 
         await msg.edit('Plasma Fight!', embed=newembed)
-        
-@bot.command()
-async def emojitest(ctx):
-    await ctx.send("<:BookYellow:495145295559000066>")
-    
-@bot.command()
-async def dictionarytest(ctx):
-    global minigameParticipants
-    placing = 1
-    logString = ""
-    dictionary = {"331882846442487810": 5, "454906800798695424": 5, "265737887805472768": 3, "372901748970487809": 6, "186541708014649344": 2}
-    for number in range(6, -1, -1):
-        await ctx.send(number)
-        if number in dictionary.values():
-            peopleWithPointCount = 0
-            for key, value in dictionary.items():
-                if value == number:
-                    user = ctx.message.guild.get_member(int(key))
-                    if user:
-                        peopleWithPointCount += 1
-                        localString = "\n#" + str(placing) + ": " + user.name
-                        logString += localString
-
-            placing += peopleWithPointCount
-    await ctx.send(logString)
         
 bot.run(os.getenv('TOKEN'))
